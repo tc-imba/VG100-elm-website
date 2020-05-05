@@ -1,0 +1,19 @@
+{
+  "name": "vg100-elm-website",
+  "version": "1.0.0",
+  "description": "This project is bootstrapped with [Create Elm App](https://github.com/halfzebra/create-elm-app).",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "material-icons": "^0.3.1",
+    "normalize.css": "^8.0.1",
+    "typeface-roboto": "0.0.75"
+  }
+}
