@@ -172,8 +172,7 @@ currentPage model =
                     notFoundView
     in
     section []
-        [ nav model
-        , page
+        [  page
         ]
 
 

@@ -1,13 +1,18 @@
 module Pages.List exposing (Model, Msg, init, subscriptions, update, view)
 
 import Html exposing (..)
-import Html.Attributes exposing (class, href)
+import Html.Attributes as Html exposing (class, href)
 import Http
 import Json.Decode as Decode
 import Markdown
 import Material
 import Material.Button as Button
-import Material.Options as Options
+import Material.Drawer.Dismissible as Drawer
+import Material.LayoutGrid as LayoutGrid exposing (cell, span1Phone, span2Phone)
+import Material.List as Lists
+import Material.Options as Options exposing (cs, css, styled, when)
+import Material.Snackbar as Snackbar
+import Material.TopAppBar as TopAppBar
 import Player exposing (Player)
 import Routes
 import Shared exposing (..)
@@ -16,6 +21,7 @@ import Shared exposing (..)
 type alias Model =
     { players : RemoteData (List Player)
     , mdc : Material.Model Msg
+    , drawer_open : Bool
     }
 
 
@@ -23,11 +29,25 @@ type Msg
     = OnFetchPlayers (Result Http.Error (List Player))
     | Mdc (Material.Msg Msg)
     | Click
+    | ToggleDrawer
+
+
+defaultModel : Model
+defaultModel =
+    { players = Loading
+    , mdc = Material.defaultModel
+    , drawer_open = False
+    }
 
 
 init : Flags -> ( Model, Cmd Msg )
 init flags =
-    ( { players = Loading, mdc = Material.defaultModel }, fetchPlayers flags )
+    ( defaultModel
+    , Cmd.batch
+        [ fetchPlayers flags
+        , Material.init Mdc
+        ]
+    )
 
 
 subscriptions : Model -> Sub Msg
@@ -50,6 +70,9 @@ update msg model =
         OnFetchPlayers (Err err) ->
             ( { model | players = Failure }, Cmd.none )
 
+        ToggleDrawer ->
+            ( { model | drawer_open = not model.drawer_open }, Cmd.none )
+
 
 
 -- DATA
@@ -67,23 +90,28 @@ fetchPlayers flags =
 
 view : Model -> Html Msg
 view model =
-    let
-        content =
-            case model.players of
-                NotAsked ->
-                    text ""
+    viewMDC model
 
-                Loading ->
-                    text "Loading ..."
 
-                Loaded players ->
-                    viewWithData model players
 
-                Failure ->
-                    text "Error"
-    in
-    section [ class "p-4" ]
-        [ content, mdcontent ]
+--section [ class "p-4" ]
+--    [  ]
+
+
+viewList : Model -> Html Msg
+viewList model =
+    case model.players of
+        NotAsked ->
+            text ""
+
+        Loading ->
+            text "Loading ..."
+
+        Loaded players ->
+            viewWithData model players
+
+        Failure ->
+            text "Error"
 
 
 mdcontent : Html msg
@@ -96,6 +124,95 @@ mdcontent =
   2. Bake an apple pie.
 
 """
+
+
+viewMDC : Model -> Html Msg
+viewMDC model =
+    styled Html.div
+        [ cs "drawer-frame-root"
+        , cs "mdc-typography"
+        , css "display" "flex"
+        , css "height" "100vh"
+        ]
+        [ viewDrawer model
+
+        --, Drawer.scrim [ Options.onClick CloseDrawer ] []
+        , styled Html.div
+            [ Drawer.appContent ]
+            [ viewList model
+            , viewTopAppBar model
+            ]
+        ]
+
+
+viewTopAppBar : Model -> Html Msg
+viewTopAppBar model =
+    TopAppBar.view Mdc
+        "my-top-app-bar"
+        model.mdc
+        []
+        [ TopAppBar.section
+            [ TopAppBar.alignStart ]
+            [ TopAppBar.navigationIcon Mdc
+                "my-top-app-bar--menu"
+                model.mdc
+                [ Options.onClick ToggleDrawer ]
+                "menu"
+            , TopAppBar.title [] [ text "Basic App Example" ]
+            ]
+        ]
+
+
+viewDrawer : Model -> Html Msg
+viewDrawer model =
+    Drawer.view Mdc
+        "my-drawer"
+        model.mdc
+        [ Drawer.open |> when model.drawer_open
+        , Drawer.onClose ToggleDrawer
+        ]
+        [ Drawer.header
+            []
+            [ styled h3 [ Drawer.title ] [ text "A Header" ]
+            ]
+        , Drawer.content []
+            [ Lists.nav Mdc
+                "my-drawer-list"
+                model.mdc
+                []
+                [ drawerLink "Dashboard"
+                , drawerLink "My account"
+                , Lists.hr [] []
+                , drawerLink "Logout"
+                ]
+            ]
+        ]
+
+
+drawerLink : String -> Lists.ListItem Msg
+drawerLink linkContent =
+    Lists.a
+        [ Options.attribute (href "#")
+        , Lists.activated |> when isActive
+        ]
+        [ text linkContent ]
+
+
+isActive : Bool
+isActive =
+    False
+
+
+viewContent =
+    div []
+        [ h1 [] [ text "My content" ]
+        , p [] [ text "My body text goes here." ]
+        ]
+
+
+viewSnackbar : Model -> Html Msg
+viewSnackbar model =
+    Snackbar.view Mdc "my-snackbar" model.mdc [] []
 
 
 viewWithData : Model -> List Player -> Html Msg
