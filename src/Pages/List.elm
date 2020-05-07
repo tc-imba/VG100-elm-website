@@ -4,6 +4,7 @@ import Html exposing (..)
 import Html.Attributes exposing (class, href)
 import Http
 import Json.Decode as Decode
+import Markdown
 import Material
 import Material.Button as Button
 import Material.Options as Options
@@ -82,7 +83,19 @@ view model =
                     text "Error"
     in
     section [ class "p-4" ]
-        [ content ]
+        [ content, mdcontent ]
+
+
+mdcontent : Html msg
+mdcontent =
+    Markdown.toHtml [ class "content" ] """
+
+# Apple Pie Recipe
+
+  1. Invent the universe.
+  2. Bake an apple pie.
+
+"""
 
 
 viewWithData : Model -> List Player -> Html Msg
