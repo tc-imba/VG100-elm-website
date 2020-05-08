@@ -90,7 +90,7 @@ fetchPlayers flags =
 
 view : Model -> Html Msg
 view model =
-    viewMDC model
+    viewList model
 
 
 
@@ -125,82 +125,6 @@ mdcontent =
 
 """
 
-
-viewMDC : Model -> Html Msg
-viewMDC model =
-    styled Html.div
-        [ cs "drawer-frame-root"
-        , cs "mdc-typography"
-        , css "display" "flex"
-        , css "height" "100vh"
-        ]
-        [ viewDrawer model
-
-        --, Drawer.scrim [ Options.onClick CloseDrawer ] []
-        , styled Html.div
-            [ Drawer.appContent ]
-            [ viewList model
-            , viewTopAppBar model
-            ]
-        ]
-
-
-viewTopAppBar : Model -> Html Msg
-viewTopAppBar model =
-    TopAppBar.view Mdc
-        "my-top-app-bar"
-        model.mdc
-        []
-        [ TopAppBar.section
-            [ TopAppBar.alignStart ]
-            [ TopAppBar.navigationIcon Mdc
-                "my-top-app-bar--menu"
-                model.mdc
-                [ Options.onClick ToggleDrawer ]
-                "menu"
-            , TopAppBar.title [] [ text "Basic App Example" ]
-            ]
-        ]
-
-
-viewDrawer : Model -> Html Msg
-viewDrawer model =
-    Drawer.view Mdc
-        "my-drawer"
-        model.mdc
-        [ Drawer.open |> when model.drawer_open
-        , Drawer.onClose ToggleDrawer
-        ]
-        [ Drawer.header
-            []
-            [ styled h3 [ Drawer.title ] [ text "A Header" ]
-            ]
-        , Drawer.content []
-            [ Lists.nav Mdc
-                "my-drawer-list"
-                model.mdc
-                []
-                [ drawerLink "Dashboard"
-                , drawerLink "My account"
-                , Lists.hr [] []
-                , drawerLink "Logout"
-                ]
-            ]
-        ]
-
-
-drawerLink : String -> Lists.ListItem Msg
-drawerLink linkContent =
-    Lists.a
-        [ Options.attribute (href "#")
-        , Lists.activated |> when isActive
-        ]
-        [ text linkContent ]
-
-
-isActive : Bool
-isActive =
-    False
 
 
 viewContent =

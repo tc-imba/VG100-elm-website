@@ -2,8 +2,17 @@ module Main exposing (init, main, subscriptions)
 
 import Browser exposing (UrlRequest)
 import Browser.Navigation as Nav exposing (Key)
-import Html exposing (Html, a, div, section, text)
+import Debug
+import Dict exposing (..)
+import Html exposing (..)
 import Html.Attributes exposing (class, href)
+import Material
+import Material.Button as Button
+import Material.Drawer.Dismissible as Drawer
+import Material.LayoutGrid as LayoutGrid exposing (cell, span1Phone, span2Phone)
+import Material.List as Lists
+import Material.Options as Options exposing (cs, css, styled, when)
+import Material.TopAppBar as TopAppBar
 import Pages.Edit as Edit
 import Pages.List as List
 import Routes exposing (Route)
@@ -16,6 +25,9 @@ type alias Model =
     , navKey : Key
     , route : Route
     , page : Page
+    , pageId : PageID
+    , drawerOpen : Bool
+    , mdc : Material.Model Msg
     }
 
 
@@ -25,11 +37,54 @@ type Page
     | PageEdit Edit.Model
 
 
+type alias PageID =
+    String
+
+
+type PageConfig
+    = PageConfig
+        { title : String
+        , href : String
+        , children : List ( PageID, PageConfig )
+        }
+
+
+initPageConfig : String -> String -> List ( PageID, PageConfig ) -> PageConfig
+initPageConfig title href children =
+    PageConfig
+        { title = title
+        , href = href
+        , children = children
+        }
+
+
+pageTitleList : List ( PageID, PageConfig )
+pageTitleList =
+    [ ( "list"
+      , initPageConfig "Elm Installation"
+            "/players"
+            [ ( "install.windows", initPageConfig "Windows" "/install/windows" [] )
+            , ( "install.linux", initPageConfig "Linux" "/install/linux" [] )
+            , ( "install.macos", initPageConfig "Mac OS" "/install/macos" [] )
+            ]
+      )
+    , ( "edit", initPageConfig "Project 1" "/players/3" [] )
+    ]
+
+
+
+--pageTitleDict : Dict PageID String
+--pageTitleDict =
+--    Dict.fromList pageTitleList
+
+
 type Msg
     = OnUrlChange Url
     | OnUrlRequest UrlRequest
     | ListMsg List.Msg
     | EditMsg Edit.Msg
+    | Mdc (Material.Msg Msg)
+    | ToggleDrawer
 
 
 init : Flags -> Url -> Key -> ( Model, Cmd Msg )
@@ -40,6 +95,9 @@ init flags url navKey =
             , navKey = navKey
             , route = Routes.parseUrl url
             , page = PageNone
+            , pageId = "none"
+            , mdc = Material.defaultModel
+            , drawerOpen = True
             }
     in
     ( model, Cmd.none )
@@ -49,44 +107,54 @@ init flags url navKey =
 loadCurrentPage : ( Model, Cmd Msg ) -> ( Model, Cmd Msg )
 loadCurrentPage ( model, cmd ) =
     let
-        ( page, newCmd ) =
+        ( page, pageId, newCmd ) =
             case model.route of
                 Routes.PlayersRoute ->
                     let
                         ( pageModel, pageCmd ) =
                             List.init model.flags
                     in
-                    ( PageList pageModel, Cmd.map ListMsg pageCmd )
+                    ( PageList pageModel, "list", Cmd.map ListMsg pageCmd )
 
                 Routes.PlayerRoute playerId ->
                     let
                         ( pageModel, pageCmd ) =
                             Edit.init model.flags playerId
                     in
-                    ( PageEdit pageModel, Cmd.map EditMsg pageCmd )
+                    ( PageEdit pageModel, "view", Cmd.map EditMsg pageCmd )
 
                 Routes.NotFoundRoute ->
-                    ( PageNone, Cmd.none )
+                    ( PageNone, "none", Cmd.none )
     in
-    ( { model | page = page }, Cmd.batch [ cmd, newCmd ] )
+    ( { model | page = page, pageId = pageId }, Cmd.batch [ cmd, newCmd ] )
 
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    case model.page of
-        PageList pageModel ->
-            Sub.map ListMsg (List.subscriptions pageModel)
+    let
+        pageSub =
+            case model.page of
+                PageList pageModel ->
+                    Sub.map ListMsg (List.subscriptions pageModel)
 
-        PageEdit pageModel ->
-            Sub.map EditMsg (Edit.subscriptions pageModel)
+                PageEdit pageModel ->
+                    Sub.map EditMsg (Edit.subscriptions pageModel)
 
-        PageNone ->
-            Sub.none
+                PageNone ->
+                    Sub.none
+    in
+    Sub.batch [ Material.subscriptions Mdc model, pageSub ]
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case ( msg, model.page ) of
+        ( Mdc msg_, _ ) ->
+            Material.update Mdc msg_ model
+
+        ( ToggleDrawer, _ ) ->
+            ( { model | drawerOpen = not model.drawerOpen }, Cmd.none )
+
         ( OnUrlRequest urlRequest, _ ) ->
             case urlRequest of
                 Browser.Internal url ->
@@ -151,7 +219,7 @@ main =
 view : Model -> Browser.Document Msg
 view model =
     { title = "App"
-    , body = [ currentPage model ]
+    , body = [ viewSkeleton model (currentPage model) ]
     }
 
 
@@ -172,8 +240,7 @@ currentPage model =
                     notFoundView
     in
     section []
-        [  page
-        ]
+        [ page ]
 
 
 nav : Model -> Html Msg
@@ -205,3 +272,90 @@ notFoundView =
     div []
         [ text "Not found"
         ]
+
+
+viewSkeleton : Model -> Html Msg -> Html Msg
+viewSkeleton model html =
+    styled Html.div
+        [ cs "drawer-frame-root"
+        , cs "mdc-typography"
+        , css "display" "flex"
+        , css "height" "100vh"
+        ]
+        [ viewDrawer model
+
+        --, Drawer.scrim [ Options.onClick CloseDrawer ] []
+        , styled Html.div
+            [ Drawer.appContent ]
+            [ viewTopAppBar model, html ]
+        ]
+
+
+viewTopAppBar : Model -> Html Msg
+viewTopAppBar model =
+    TopAppBar.view Mdc
+        "my-top-app-bar"
+        model.mdc
+        []
+        [ TopAppBar.section
+            [ TopAppBar.alignStart ]
+            [ TopAppBar.navigationIcon Mdc
+                "my-top-app-bar--menu"
+                model.mdc
+                [ Options.onClick ToggleDrawer ]
+                "menu"
+            , TopAppBar.title [] [ text "Basic App Example" ]
+            ]
+        ]
+
+
+viewDrawer : Model -> Html Msg
+viewDrawer model =
+    Drawer.view Mdc
+        "my-drawer"
+        model.mdc
+        [ Drawer.open |> when model.drawerOpen
+        , Drawer.onClose ToggleDrawer
+        ]
+        [ Drawer.header
+            []
+            [ styled h3 [ Drawer.title ] [ text "VG100 Elm Website" ]
+            ]
+        , Drawer.content []
+            [ Lists.nav Mdc
+                "my-drawer-list"
+                model.mdc
+                [ Lists.singleSelection, Lists.useActivated ]
+                (List.concat (List.map (\p -> drawerLink model.pageId p 0) pageTitleList))
+            ]
+        ]
+
+
+drawerLink : PageID -> ( PageID, PageConfig ) -> Int -> List (Lists.ListItem Msg)
+drawerLink currentPageId ( pageId, pageConfig ) level =
+    let
+        p_ =
+            case pageConfig of
+                PageConfig p ->
+                    p
+
+        parent =
+            Lists.a
+                [ Options.attribute (href p_.href)
+                , Lists.activated |> when (pageId == currentPageId)
+                ]
+                [ text p_.title ]
+
+        hr =
+            if level == 0 then
+                [ Lists.hr [] [] ]
+
+            else
+                []
+
+        children =
+            List.concat (List.map (\p -> drawerLink currentPageId p (level + 1)) p_.children)
+    in
+    [ parent ] ++ children ++ hr
+
+
