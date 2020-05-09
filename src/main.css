@@ -6,44 +6,50 @@
     https://github.com/halfzebra/create-elm-app/issues/320
 */
 [data-elm-hot="true"] {
-  height: inherit;
+    height: inherit;
 }
 
 body {
-  font-family: 'Source Sans Pro', 'Trebuchet MS', 'Lucida Grande', 'Bitstream Vera Sans', 'Helvetica Neue', sans-serif;
-  margin: 0;
-  text-align: center;
-  color: #293c4b;
+    font-family: 'Source Sans Pro', 'Trebuchet MS', 'Lucida Grande', 'Bitstream Vera Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    /*text-align: center;*/
+    color: #293c4b;
+}
+
+.content {
+    margin: 20px;
+    /*max-width: 1200px;*/
+    /*width: 100%;*/
 }
 
 h1 {
-  font-size: 30px;
+    font-size: 30px;
 }
 
 img {
-  margin: 20px 0;
-  max-width: 200px;
+    margin: 20px 0;
+    max-width: 200px;
 }
 
 @font-face {
-  font-family: 'Material Icons';
-  font-style: normal;
-  font-weight: 400;
-  src: url('../node_modules/material-icons/iconfont/MaterialIcons-Regular.woff2') format('woff2');
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../node_modules/material-icons/iconfont/MaterialIcons-Regular.woff2') format('woff2');
 }
 
 .material-icons {
-  font-family: 'Material Icons';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 24px;
-  line-height: 1;
-  letter-spacing: normal;
-  text-transform: none;
-  display: inline-block;
-  white-space: nowrap;
-  word-wrap: normal;
-  direction: ltr;
-  -webkit-font-feature-settings: 'liga';
-  -webkit-font-smoothing: antialiased;
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
 }

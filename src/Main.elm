@@ -13,8 +13,10 @@ import Material.LayoutGrid as LayoutGrid exposing (cell, span1Phone, span2Phone)
 import Material.List as Lists
 import Material.Options as Options exposing (cs, css, styled, when)
 import Material.TopAppBar as TopAppBar
+import Material.Typography as Typography
 import Pages.Edit as Edit
 import Pages.List as List
+import Pages.Markdown as Markdown
 import Routes exposing (Route)
 import Shared exposing (..)
 import Url exposing (Url)
@@ -35,6 +37,7 @@ type Page
     = PageNone
     | PageList List.Model
     | PageEdit Edit.Model
+    | PageMarkdown Markdown.Model
 
 
 type alias PageID =
@@ -83,6 +86,7 @@ type Msg
     | OnUrlRequest UrlRequest
     | ListMsg List.Msg
     | EditMsg Edit.Msg
+    | MarkdownMsg Markdown.Msg
     | Mdc (Material.Msg Msg)
     | ToggleDrawer
 
@@ -123,6 +127,13 @@ loadCurrentPage ( model, cmd ) =
                     in
                     ( PageEdit pageModel, "view", Cmd.map EditMsg pageCmd )
 
+                Routes.MarkdownRoute markdownName ->
+                    let
+                        ( pageModel, pageCmd ) =
+                            Markdown.init model.flags markdownName
+                    in
+                    ( PageMarkdown pageModel, "md." ++ markdownName, Cmd.map MarkdownMsg pageCmd )
+
                 Routes.NotFoundRoute ->
                     ( PageNone, "none", Cmd.none )
     in
@@ -139,6 +150,9 @@ subscriptions model =
 
                 PageEdit pageModel ->
                     Sub.map EditMsg (Edit.subscriptions pageModel)
+
+                PageMarkdown pageModel ->
+                    Sub.map MarkdownMsg (Markdown.subscriptions pageModel)
 
                 PageNone ->
                     Sub.none
@@ -199,6 +213,18 @@ update msg model =
         ( EditMsg subMsg, _ ) ->
             ( model, Cmd.none )
 
+        ( MarkdownMsg subMsg, PageMarkdown pageModel ) ->
+            let
+                ( newPageModel, newCmd ) =
+                    Markdown.update subMsg pageModel
+            in
+            ( { model | page = PageMarkdown newPageModel }
+            , Cmd.map MarkdownMsg newCmd
+            )
+
+        ( MarkdownMsg subMsg, _ ) ->
+            ( model, Cmd.none )
+
 
 main : Program Flags Model Msg
 main =
@@ -236,35 +262,40 @@ currentPage model =
                     Edit.view pageModel
                         |> Html.map EditMsg
 
+                PageMarkdown pageModel ->
+                    Markdown.view pageModel
+                        |> Html.map MarkdownMsg
+
                 PageNone ->
                     notFoundView
     in
-    section []
-        [ page ]
+    page
 
 
-nav : Model -> Html Msg
-nav model =
-    let
-        links =
-            case model.route of
-                Routes.PlayersRoute ->
-                    [ text "Players" ]
 
-                Routes.PlayerRoute _ ->
-                    [ linkToList
-                    ]
+{- nav : Model -> Html Msg
+   nav model =
+       let
+           links =
+               case model.route of
+                   Routes.PlayersRoute ->
+                       [ text "Players" ]
 
-                Routes.NotFoundRoute ->
-                    [ linkToList
-                    ]
+                   Routes.PlayerRoute _ ->
+                       [ linkToList
+                       ]
 
-        linkToList =
-            a [ href Routes.playersPath, class "text-white" ] [ text "List" ]
-    in
-    div
-        [ class "mb-2 text-white bg-black p-4" ]
-        links
+                   Routes.NotFoundRoute ->
+                       [ linkToList
+                       ]
+
+           linkToList =
+               a [ href Routes.playersPath, class "text-white" ] [ text "List" ]
+       in
+       div
+           [ class "mb-2 text-white bg-black p-4" ]
+           links
+-}
 
 
 notFoundView : Html msg
@@ -283,10 +314,11 @@ viewSkeleton model html =
         , css "height" "100vh"
         ]
         [ viewDrawer model
-
-        --, Drawer.scrim [ Options.onClick CloseDrawer ] []
         , styled Html.div
-            [ Drawer.appContent ]
+            [ Drawer.appContent
+            , TopAppBar.fixedAdjust
+            , Typography.typography
+            ]
             [ viewTopAppBar model, html ]
         ]
 
@@ -304,7 +336,7 @@ viewTopAppBar model =
                 model.mdc
                 [ Options.onClick ToggleDrawer ]
                 "menu"
-            , TopAppBar.title [] [ text "Basic App Example" ]
+            , TopAppBar.title [] [ text "VG100 Elm Website" ]
             ]
         ]
 
@@ -319,7 +351,7 @@ viewDrawer model =
         ]
         [ Drawer.header
             []
-            [ styled h3 [ Drawer.title ] [ text "VG100 Elm Website" ]
+            [ styled h3 [ Drawer.title ] [ text "Contents" ]
             ]
         , Drawer.content []
             [ Lists.nav Mdc
@@ -357,5 +389,3 @@ drawerLink currentPageId ( pageId, pageConfig ) level =
             List.concat (List.map (\p -> drawerLink currentPageId p (level + 1)) p_.children)
     in
     [ parent ] ++ children ++ hr
-
-

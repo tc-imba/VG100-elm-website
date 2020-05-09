@@ -10,7 +10,7 @@ import { Elm } from './Main.elm';
 import * as serviceWorker from './serviceWorker';
 
 const flags = {
-  api: "http://localhost:4000",
+  api: "http://localhost:5000",
 }
 
 Elm.Main.init({

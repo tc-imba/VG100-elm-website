@@ -1,4 +1,4 @@
-module Routes exposing (Route(..), parseUrl, playerPath, playersPath)
+module Routes exposing (Route(..), parseUrl, playerPath, playersPath, markdownPath)
 
 import Url exposing (Url)
 import Url.Parser exposing (..)
@@ -7,6 +7,7 @@ import Url.Parser exposing (..)
 type Route
     = PlayersRoute
     | PlayerRoute String
+    | MarkdownRoute String
     | NotFoundRoute
 
 
@@ -16,6 +17,7 @@ matchers =
         [ map PlayersRoute top
         , map PlayerRoute (s "players" </> string)
         , map PlayersRoute (s "players")
+        , map MarkdownRoute (s "markdown" </> string)
         ]
 
 
@@ -38,6 +40,9 @@ pathFor route =
         PlayerRoute id ->
             "/players/" ++ id
 
+        MarkdownRoute name ->
+            "/markdown/" ++ name
+
         NotFoundRoute ->
             "/"
 
@@ -48,3 +53,7 @@ playersPath =
 
 playerPath id =
     pathFor (PlayerRoute id)
+
+
+markdownPath name =
+    pathFor (MarkdownRoute name)

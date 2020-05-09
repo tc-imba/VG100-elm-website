@@ -7,6 +7,7 @@ setup(
     include_package_data=True,
     install_requires=[
         'flask>=1.1.1',
+        'flask-cors',
         'gitpython',
     ],
 )

@@ -6,9 +6,7 @@ import shutil
 import subprocess
 
 
-@app.route('/test', methods=['GET'])
-def hello_test():
-    return 'Hello World!'
+
 
 
 @app.route('/api/build/<path:name>')
