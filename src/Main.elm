@@ -63,15 +63,16 @@ initPageConfig title href children =
 
 pageTitleList : List ( PageID, PageConfig )
 pageTitleList =
-    [ ( "md.install"
-      , initPageConfig "Elm Installation"
-            "/markdown/install"
-            [ ( "md.install.windows", initPageConfig "Windows" "/markdown/install.windows" [] )
-            , ( "md.install.linux", initPageConfig "Linux" "/markdown/install.linux" [] )
-            , ( "md.install.macos", initPageConfig "Mac OS" "/markdown/install.macos" [] )
+    [ ( "md.env"
+      , initPageConfig "Environment Setup"
+            "/markdown/env"
+            [ ( "md.env.elm", initPageConfig "Elm Installation" "/markdown/env.elm" [] )
+            , ( "md.env.git", initPageConfig "Git" "/markdown/env.git" [] )
+            , ( "md.env.redmine", initPageConfig "Redmine" "/markdown/env.redmine" [] )
             ]
       )
-    , ( "edit", initPageConfig "Project 1" "/players/3" [] )
+    , ( "p1", initPageConfig "Project 1" "/players/3" [] )
+    , ( "p2", initPageConfig "Project 2" "/players/3" [] )
     ]
 
 
@@ -273,31 +274,6 @@ currentPage model =
 
 
 
-{- nav : Model -> Html Msg
-   nav model =
-       let
-           links =
-               case model.route of
-                   Routes.PlayersRoute ->
-                       [ text "Players" ]
-
-                   Routes.PlayerRoute _ ->
-                       [ linkToList
-                       ]
-
-                   Routes.NotFoundRoute ->
-                       [ linkToList
-                       ]
-
-           linkToList =
-               a [ href Routes.playersPath, class "text-white" ] [ text "List" ]
-       in
-       div
-           [ class "mb-2 text-white bg-black p-4" ]
-           links
--}
-
-
 notFoundView : Html msg
 notFoundView =
     div []
@@ -318,6 +294,7 @@ viewSkeleton model html =
             [ Drawer.appContent
             , TopAppBar.fixedAdjust
             , Typography.typography
+            , css "width" "100%"
             ]
             [ viewTopAppBar model, html ]
         ]

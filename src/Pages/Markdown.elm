@@ -51,7 +51,7 @@ update msg model =
             ( { model | markdown = markdown }, Cmd.none )
 
         OnFetchMarkdown (Err err) ->
-            ( { model | markdown = "## Sorry, Page not Exist!" }, Cmd.none )
+            ( { model | markdown = "# Sorry, Page not Exist!" }, Cmd.none )
 
 
 
@@ -70,4 +70,6 @@ fetchMarkdown flags markdownName =
 
 view : Model -> Html Msg
 view model =
-    Markdown.toHtml [ class "content" ] model.markdown
+    Html.div
+        [ class "content" ]
+        [ Markdown.toHtml [ class "markdown-body" ] model.markdown ]

@@ -17,9 +17,7 @@ body {
 }
 
 .content {
-    margin: 20px;
-    /*max-width: 1200px;*/
-    /*width: 100%;*/
+
 }
 
 h1 {
@@ -53,3 +51,22 @@ img {
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
 }
+
+.markdown-body {
+    box-sizing: border-box;
+    min-width: 200px;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 45px;
+}
+
+@media (max-width: 767px) {
+    .markdown-body {
+        padding: 15px;
+    }
+}
+
+:root {
+    /*--mdc-theme-primary: #018786;*/
+}
+
