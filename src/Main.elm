@@ -63,12 +63,12 @@ initPageConfig title href children =
 
 pageTitleList : List ( PageID, PageConfig )
 pageTitleList =
-    [ ( "list"
+    [ ( "md.install"
       , initPageConfig "Elm Installation"
-            "/players"
-            [ ( "install.windows", initPageConfig "Windows" "/install/windows" [] )
-            , ( "install.linux", initPageConfig "Linux" "/install/linux" [] )
-            , ( "install.macos", initPageConfig "Mac OS" "/install/macos" [] )
+            "/markdown/install"
+            [ ( "md.install.windows", initPageConfig "Windows" "/markdown/install.windows" [] )
+            , ( "md.install.linux", initPageConfig "Linux" "/markdown/install.linux" [] )
+            , ( "md.install.macos", initPageConfig "Mac OS" "/markdown/install.macos" [] )
             ]
       )
     , ( "edit", initPageConfig "Project 1" "/players/3" [] )

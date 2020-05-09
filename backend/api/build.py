@@ -12,7 +12,7 @@ import subprocess
 @app.route('/api/build/<path:name>')
 # @check_argument("name")
 def build_project(name: str):
-    name = name.replace('/', '')
+    name = name.replace('/', '.')
     base_dir = os.path.abspath('repos')
     project_dir = os.path.join(base_dir, name)
     shutil.rmtree(project_dir, ignore_errors=True)

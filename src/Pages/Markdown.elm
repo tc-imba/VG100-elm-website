@@ -51,7 +51,7 @@ update msg model =
             ( { model | markdown = markdown }, Cmd.none )
 
         OnFetchMarkdown (Err err) ->
-            ( { model | markdown = "Failure" }, Cmd.none )
+            ( { model | markdown = "## Sorry, Page not Exist!" }, Cmd.none )
 
 
 
@@ -60,7 +60,7 @@ update msg model =
 
 fetchMarkdown : Flags -> String -> Cmd Msg
 fetchMarkdown flags markdownName =
-    Http.getString (flags.api ++ "/api/markdown/" ++ markdownName)
+    Http.getString (flags.api ++ "/api/markdown/" ++ markdownName ++ ".md")
         |> Http.send OnFetchMarkdown
 
 
