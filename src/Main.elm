@@ -48,38 +48,64 @@ type PageConfig
     = PageConfig
         { title : String
         , href : String
+        , data : String
         , children : List ( PageID, PageConfig )
         }
 
 
-initPageConfig : String -> String -> List ( PageID, PageConfig ) -> PageConfig
-initPageConfig title href children =
+initPageConfig : String -> String -> String -> List ( PageID, PageConfig ) -> PageConfig
+initPageConfig title href data children =
     PageConfig
         { title = title
         , href = href
+        , data = data
         , children = children
         }
 
 
-pageTitleList : List ( PageID, PageConfig )
-pageTitleList =
-    [ ( "md.env"
+pageConfigDefault : PageConfig
+pageConfigDefault =
+    initPageConfig "Home" "/" "home/index.md" []
+
+
+pageConfigList : List ( PageID, PageConfig )
+pageConfigList =
+    [ ( "md.home", pageConfigDefault )
+    , ( "md.env"
       , initPageConfig "Environment Setup"
             "/markdown/env"
-            [ ( "md.env.elm", initPageConfig "Elm Installation" "/markdown/env.elm" [] )
-            , ( "md.env.git", initPageConfig "Git" "/markdown/env.git" [] )
-            , ( "md.env.redmine", initPageConfig "Redmine" "/markdown/env.redmine" [] )
+            "/env/index.md"
+            [ ( "md.env.elm", initPageConfig "Elm Installation" "/markdown/env.elm" "env/elm/index.md" [] )
+            , ( "md.env.git", initPageConfig "Git" "/markdown/env.git" "env/git/index.md" [] )
+            , ( "md.env.redmine", initPageConfig "Redmine" "/markdown/env.redmine" "env/redmine/index.md" [] )
             ]
       )
-    , ( "p1", initPageConfig "Project 1" "/players/3" [] )
-    , ( "p2", initPageConfig "Project 2" "/players/3" [] )
+    , ( "md.ref"
+      , initPageConfig "References"
+            "/markdown/ref"
+            "/env/ref/index.md"
+            [ ( "md.ref.playground", initPageConfig "Elm Playground" "/markdown/ref.playground" "ref/playground.md" [] )
+            ]
+      )
+    , ( "p1", initPageConfig "Project 1" "/#" "" [] )
+    , ( "p2", initPageConfig "Project 2" "/#" "" [] )
     ]
 
 
+pageConfigDict : Dict PageID PageConfig
+pageConfigDict =
+    Dict.fromList (List.concat (List.map initPageConfigDict pageConfigList))
 
---pageTitleDict : Dict PageID String
---pageTitleDict =
---    Dict.fromList pageTitleList
+
+initPageConfigDict : ( PageID, PageConfig ) -> List ( PageID, PageConfig )
+initPageConfigDict ( pageId, pageConfig ) =
+    let
+        p_ =
+            case pageConfig of
+                PageConfig p ->
+                    p
+    in
+    [ ( pageId, pageConfig ) ] ++ List.concat (List.map initPageConfigDict p_.children)
 
 
 type Msg
@@ -128,12 +154,38 @@ loadCurrentPage ( model, cmd ) =
                     in
                     ( PageEdit pageModel, "view", Cmd.map EditMsg pageCmd )
 
+                Routes.MarkdownHomeRoute ->
+                    let
+                        pageId_ =
+                            "md.home"
+
+                        p_ =
+                            case pageConfigDefault of
+                                PageConfig p ->
+                                    p
+
+                        ( pageModel, pageCmd ) =
+                            Markdown.init model.flags p_.data
+                    in
+                    ( PageMarkdown pageModel, pageId_, Cmd.map MarkdownMsg pageCmd )
+
                 Routes.MarkdownRoute markdownName ->
                     let
+                        pageId_ =
+                            "md." ++ markdownName
+
+                        pageConfig =
+                            Maybe.withDefault pageConfigDefault (Dict.get pageId_ pageConfigDict)
+
+                        p_ =
+                            case pageConfig of
+                                PageConfig p ->
+                                    p
+
                         ( pageModel, pageCmd ) =
-                            Markdown.init model.flags markdownName
+                            Markdown.init model.flags p_.data
                     in
-                    ( PageMarkdown pageModel, "md." ++ markdownName, Cmd.map MarkdownMsg pageCmd )
+                    ( PageMarkdown pageModel, pageId_, Cmd.map MarkdownMsg pageCmd )
 
                 Routes.NotFoundRoute ->
                     ( PageNone, "none", Cmd.none )
@@ -273,7 +325,6 @@ currentPage model =
     page
 
 
-
 notFoundView : Html msg
 notFoundView =
     div []
@@ -335,7 +386,7 @@ viewDrawer model =
                 "my-drawer-list"
                 model.mdc
                 [ Lists.singleSelection, Lists.useActivated ]
-                (List.concat (List.map (\p -> drawerLink model.pageId p 0) pageTitleList))
+                (List.concat (List.map (\p -> drawerLink model.pageId p 0) pageConfigList))
             ]
         ]
 

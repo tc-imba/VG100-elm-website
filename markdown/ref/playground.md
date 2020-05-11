@@ -1,15 +1,3 @@
-<style>
-table th:first-of-type {
-    width: 15%;
-}
-table th:nth-of-type(2) {
-    width: 35%;
-}
-table th:nth-of-type(3) {
-    width: 50%;
-}
-</style>
-
 # Elm Playground Reference Sheet
 
 [Elm Playground](https://package.elm-lang.org/packages/evancz/elm-playground/latest/) is a third-party package, aiming to help elm beginners to develop their animations or games easily. In milestone 1 of project 1, we will develop a "break-out" game using Elm Playground.
@@ -24,7 +12,7 @@ elm install evancz/elm-playground
 
 The elm package manager will automatically set up everything, and you should be able to find `"evancz/elm-playground": "1.0.3"`  in `elm.json` file in the project directory.
 
-To import the playground into your project, add 
+To import the playground into your project, add
 ```
 import Playground exposing (..)
 ```
@@ -39,11 +27,11 @@ Although this reference sheet is for you to easily look up the functions, you ca
 
 ### About Coordinates
 
-Elm Playground uses Cartesian coordianate system, the same as what we have learned in middle school, i.e., 
+Elm Playground uses Cartesian coordinate system, the same as what we have learned in middle school, i.e.,
 
-1. the origin is at the center of screen, 
-1. the positive x-axis points to the right, 
-1. the positive y-axis points to the top, 
+1. the origin is at the center of screen,
+1. the positive x-axis points to the right,
+1. the positive y-axis points to the top,
 
 which differs from some other packages, e.g., `Svg`.
 
@@ -57,15 +45,15 @@ Elm Playground provides 3 basic functions to achieve different goals. In milesto
 ### Basics
 
 | Name | Interface | Description |
-| - | - | - |
+| --- | --- | --- |
 | `picture` | `List Shape -> Program () Screen (Int, Int)` | See [Elm Playground](https://package.elm-lang.org/packages/evancz/elm-playground/latest/) |
-| `animation` | `(Time -> List Shape) -> Program () Animation Msg` | See [Elm Playground](https://package.elm-lang.org/packages/evancz/elm-playground/latest/) | 
+| `animation` | `(Time -> List Shape) -> Program () Animation Msg` | See [Elm Playground](https://package.elm-lang.org/packages/evancz/elm-playground/latest/) |
 | `game` | `(Computer -> memory -> List Shape) -> (Computer -> memory -> memory) -> memory -> Program () (Game memory) Msg` | See [Elm Playground](https://package.elm-lang.org/packages/evancz/elm-playground/latest/) |
 
 ### Shape
 
 | Name | Interface | Description |
-| - | - | - |
+| --- | --- | --- |
 | `circle` | `Color -> Number -> Shape` | Given color and radius, draw a circle |
 | `oval` | `Color -> Number -> Number -> Shape` | Given color, width and height, draw an oval |
 | `square` | `Color -> Number -> Shape` | Given color and length of side, draw a square
@@ -83,7 +71,7 @@ Elm Playground provides 3 basic functions to achieve different goals. In milesto
 ### Shape Transformation
 
 | Name | Interface | Description |
-| - | - | - |
+| --- | --- | --- |
 | `move` | `Number -> Number -> Shape -> Shape` | Move the shape by some number of pixels |
 | `moveUp` | `Number -> Shape -> Shape` | Move the shape up by some number of pixels |
 | `moveDown` | `Number -> Shape -> Shape` | Move the shape down by some number of pixels |
@@ -99,8 +87,8 @@ Elm Playground provides 3 basic functions to achieve different goals. In milesto
 
 ### Animation
 
-| Name | Interface | Description | 
-| - | - | - |
+| Name | Interface | Description |
+| --- | --- | --- |
 | `spin` | `Number -> Time -> Number` | Create an angle that cycles from 0 to 360 degrees over time, usually used together with `rotate` (see [Animation Example](https://elm-lang.org/examples/animation))
 | `wave` | `Number -> Number -> Number -> Time -> Number` | Smoothly wave between two numbers |
 | `zigzag` | `Number -> Number -> Number -> Time -> Number` | Zig zag between two numbers |
@@ -108,14 +96,14 @@ Elm Playground provides 3 basic functions to achieve different goals. In milesto
 ### Game
 
 | Type Alias | Type |
-| - | - |
+| --- | --- |
 | `Computer` | `{ mouse : Mouse`<br>`, keyboard : Keyboard`<br>`, screen : Screen`<br>` , time : Time`<br>`}` |
 | `Number` | `Float` |
 | `Mouse` | `{ x : Number`<br>`, y : Number`<br>`, down : Bool`<br>`, click : Bool`<br>`}`|
 | `Keyboard` | `{ up : Bool`<br>`, down : Bool`<br>`, left : Bool`<br>`, right : Bool`<br>`, space : Bool`<br>`, enter : Bool`<br>`, shift : Bool`<br>`, backspace : Bool`<br>`, keys : Set.Set String`<br>`}` |
 
 | Name | Interface | Description |
-| - | - | - |
+| --- | --- | --- |
 | `toX` |` Keyboard -> Number` | Turn the `LEFT` and `RIGHT` arrows into `-1`, `0`, or `1` |
 | `toX` |` Keyboard -> Number` | Turn the `UP` and `DOWN` arrows into `-1`, `0`, or `1` |
 | `toXY` |` Keyboard -> (Number, Number)` | A combination of `toX` and `toY` |
@@ -125,16 +113,16 @@ Elm Playground provides 3 basic functions to achieve different goals. In milesto
 
 Elm Playground provides a bunch of colors that you can directly use in creating a shape. They are:
 
-1. `red`, `lightRed`, `darkRed`, 
-1. `orange`, `lightOrange`, `darkOrange`, 
-1. `yellow`, `lightYellow`, `darkYellow`, 
-1. `green`, `lightGreen`, `darkGreen`, 
-1. `blue`, `lightBlue`, `darkBlue`, 
-1. `purple`, `lightPurple`, `darkPurple`, 
-1. `brown`, `lightBrown`, `darkBrown`, 
-1. `grey` / `gray`, `lightGrey` / `lightGray`, `darkGrey` / `darkGray`, 
-1. `charcoal`, `lightCharcoal`, `darkCharcoal`, 
-1. `white`, 
+1. `red`, `lightRed`, `darkRed`,
+1. `orange`, `lightOrange`, `darkOrange`,
+1. `yellow`, `lightYellow`, `darkYellow`,
+1. `green`, `lightGreen`, `darkGreen`,
+1. `blue`, `lightBlue`, `darkBlue`,
+1. `purple`, `lightPurple`, `darkPurple`,
+1. `brown`, `lightBrown`, `darkBrown`,
+1. `grey` / `gray`, `lightGrey` / `lightGray`, `darkGrey` / `darkGray`,
+1. `charcoal`, `lightCharcoal`, `darkCharcoal`,
+1. `white`,
 1. `black`
 
 Meanwhile, you are allowed to custom the color in two ways:
@@ -142,3 +130,14 @@ Meanwhile, you are allowed to custom the color in two ways:
 1. `Hex String`, e.g., `Hex "#FFFFFF"`
 1. `Rgb Int Int Int`, e.g., `Rgb 255 255 255`
 
+<style>
+table th:first-of-type {
+    width: 15%;
+}
+table th:nth-of-type(2) {
+    width: 35%;
+}
+table th:nth-of-type(3) {
+    width: 50%;
+}
+</style>

@@ -71,13 +71,18 @@ You can download the WebStorm IDE [here](https://www.jetbrains.com/webstorm/), o
 
 In order to use WebStorm for free, you need to register a JetBrains Account and apply for a [student license](https://www.jetbrains.com/shop/eform/students). If you have already used CLion in VG101, you can use the same account and do not need to apply again.
 
-Then you can install the [Elm plugin](https://plugins.jetbrains.com/plugin/10268-elm) in WebStorm. There will be a `Elm` block in Settings (or Preferences on macOS), you need to configure the path of `elm`, `elm-format` and `elm-test` installed by `npm`. If the auto detection failed on Windows, please ensure that `C:\Users\liu\AppData\Roaming\npm` is already in your environment variable `Path`.
+Then you can install the [Elm plugin](https://plugins.jetbrains.com/plugin/10268-elm) in WebStorm. There will be a `Elm` block in Settings (or Preferences on macOS), you need to configure the path of `elm`, `elm-format` and `elm-test` installed by `npm`. If the auto detection failed on Windows, please ensure that `C:\Users\liu\AppData\Roaming\npm` is already in your environment variable `Path`, or you can select the files manually as shown in the example below.
+
+![img](/markdown/env/elm/webstorm.png "WebStorm")
 
 After everything is configured, there will be a popup (or notice) about selecting the `elm.json` file. Note that you may need to run `elm make` before selecting `elm.json` if there exist dependencies that are not installed on your computer.
+
+
 
 ### VSCode
 
 ### Sublime Text
 
 ### Atom
+
 

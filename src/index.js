@@ -14,8 +14,11 @@ import './main.css'
 import { Elm } from './Main.elm';
 import * as serviceWorker from './serviceWorker';
 
+const env = process.env.NODE_ENV;
+const devMode = env  !== 'production';
+
 const flags = {
-  api: "http://localhost:5000",
+  api: devMode ? "http://localhost:5000" : "",
 }
 
 Elm.Main.init({

@@ -11,6 +11,7 @@ import Shared exposing (..)
 type alias Model =
     { mdc : Material.Model Msg
     , markdown : String
+    , api : String
     }
 
 
@@ -19,16 +20,17 @@ type Msg
     | Mdc (Material.Msg Msg)
 
 
-defaultModel : Model
-defaultModel =
+defaultModel : String -> Model
+defaultModel api =
     { mdc = Material.defaultModel
     , markdown = ""
+    , api = api
     }
 
 
 init : Flags -> String -> ( Model, Cmd Msg )
 init flags markdownName =
-    ( defaultModel
+    ( defaultModel flags.api
     , Cmd.batch
         [ fetchMarkdown flags markdownName
         , Material.init Mdc
@@ -60,7 +62,7 @@ update msg model =
 
 fetchMarkdown : Flags -> String -> Cmd Msg
 fetchMarkdown flags markdownName =
-    Http.getString (flags.api ++ "/api/markdown/" ++ markdownName ++ ".md")
+    Http.getString (flags.api ++ "/api/markdown/" ++ markdownName)
         |> Http.send OnFetchMarkdown
 
 
@@ -68,8 +70,27 @@ fetchMarkdown flags markdownName =
 -- VIEWS
 
 
+injectLinks : String -> String -> String
+injectLinks markdown api =
+    -- this is dirty! fix it later!
+    String.replace "(/markdown/" ("(" ++ api ++ "/api/markdown/") markdown
+
+
+myOptions : Markdown.Options
+myOptions =
+    { githubFlavored = Just { tables = True, breaks = True }
+    , defaultHighlighting = Nothing
+    , sanitize = False
+    , smartypants = True
+    }
+
+
 view : Model -> Html Msg
 view model =
     Html.div
         [ class "content" ]
-        [ Markdown.toHtml [ class "markdown-body" ] model.markdown ]
+        [ Markdown.toHtmlWith
+            myOptions
+            [ class "markdown-body" ]
+            (injectLinks model.markdown model.api)
+        ]
