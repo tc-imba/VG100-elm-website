@@ -51,7 +51,7 @@ In China, the connection to `npm` official registry may be very slow, you can se
 
 ```bash
 npm config set registry https://registry.npm.taobao.org
-````
+```
 
 Then you can use `npm` to install these packages
 

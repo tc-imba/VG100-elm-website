@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# init node modules
+npm install -g yarn create-elm-app
+yarn
+
 # init the submodule
 git submodule update --init --recursive
 cd elm-mdc && make
@@ -12,8 +16,4 @@ elm make
 python3 -m virtualenv venv
 source venv/bin/activate
 pip3 install -e .
-
-# init node modules
-npm install -g yarn create-elm-app
-yarn
 
