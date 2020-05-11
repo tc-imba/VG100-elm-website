@@ -1,3 +1,4 @@
 # Project 1
 
-[demo](/demo/p1teamta)
+<a href="/demo/p1teamta/" target="_blank">demo</a>
+
