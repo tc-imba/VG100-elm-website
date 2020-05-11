@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # init node modules
-npm install -g yarn create-elm-app
+npm install -g yarn create-elm-app elm
 yarn
 
 # init the submodule

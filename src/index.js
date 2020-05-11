@@ -18,7 +18,7 @@ const env = process.env.NODE_ENV;
 const devMode = env  !== 'production';
 
 const flags = {
-  api: devMode ? "http://localhost:5000" : "",
+  api: devMode ? "http://localhost:5000/vg100" : "/vg100",
 }
 
 Elm.Main.init({

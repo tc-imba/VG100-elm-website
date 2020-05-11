@@ -65,7 +65,12 @@ initPageConfig title href data children =
 
 pageConfigDefault : PageConfig
 pageConfigDefault =
-    initPageConfig "Home" "/" "home/index.md" []
+    initPageConfig "Home" "/vg100" "home/index.md" []
+
+
+markdownPrefix : String -> String
+markdownPrefix name =
+    "/vg100/markdown/" ++ name
 
 
 pageConfigList : List ( PageID, PageConfig )
@@ -73,22 +78,22 @@ pageConfigList =
     [ ( "md.home", pageConfigDefault )
     , ( "md.env"
       , initPageConfig "Environment Setup"
-            "/markdown/env"
+            (markdownPrefix "env")
             "/env/index.md"
-            [ ( "md.env.elm", initPageConfig "Elm Installation" "/markdown/env.elm" "env/elm/index.md" [] )
-            , ( "md.env.git", initPageConfig "Git" "/markdown/env.git" "env/git/index.md" [] )
-            , ( "md.env.redmine", initPageConfig "Redmine" "/markdown/env.redmine" "env/redmine/index.md" [] )
+            [ ( "md.env.elm", initPageConfig "Elm Installation" (markdownPrefix "env.elm") "env/elm/index.md" [] )
+            , ( "md.env.git", initPageConfig "Git" (markdownPrefix "env.git") "env/git/index.md" [] )
+            , ( "md.env.redmine", initPageConfig "Redmine" (markdownPrefix "env.redmine") "env/redmine/index.md" [] )
             ]
       )
     , ( "md.ref"
       , initPageConfig "References"
-            "/markdown/ref"
-            "/env/ref/index.md"
-            [ ( "md.ref.playground", initPageConfig "Elm Playground" "/markdown/ref.playground" "ref/playground.md" [] )
+            (markdownPrefix "ref")
+            "env/ref/index.md"
+            [ ( "md.ref.playground", initPageConfig "Elm Playground" (markdownPrefix "ref.playground") "ref/playground.md" [] )
             ]
       )
-    , ( "p1", initPageConfig "Project 1" "/#" "" [] )
-    , ( "p2", initPageConfig "Project 2" "/#" "" [] )
+    , ( "md.p1", initPageConfig "Project 1" (markdownPrefix "p1") "p1/index.md" [] )
+    , ( "md.p2", initPageConfig "Project 2" (markdownPrefix "p2") "p2/index.md" [] )
     ]
 
 

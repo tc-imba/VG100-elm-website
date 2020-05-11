@@ -74,7 +74,7 @@ injectLinks : String -> String -> String
 injectLinks markdown api =
     -- this is dirty! fix it later!
     String.replace "(/markdown/" ("(" ++ api ++ "/api/markdown/") markdown
-
+        |> String.replace "(/project/" ("(" ++ api ++ "/project/")
 
 myOptions : Markdown.Options
 myOptions =

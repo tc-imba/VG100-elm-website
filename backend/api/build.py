@@ -1,4 +1,4 @@
-from backend import app
+from backend import app, url_prefix
 from backend.utils import check_argument
 import git
 import os
@@ -9,7 +9,7 @@ import subprocess
 
 
 
-@app.route('/api/build/<path:name>')
+@app.route('%s/api/build/<path:name>' % url_prefix)
 # @check_argument("name")
 def build_project(name: str):
     name = name.replace('/', '.')

@@ -1,9 +1,9 @@
 import os
 
-from backend import app
+from backend import app, url_prefix
 from flask import send_from_directory
 
-@app.route('/api/markdown/<path:name>', methods=['GET'])
+@app.route('%s/api/markdown/<path:name>' % url_prefix, methods=['GET'])
 def show_markdown(name):
     #name = name.replace('/', '.')
     markdown_dir = os.path.join(os.path.dirname(app.instance_path), 'markdown')

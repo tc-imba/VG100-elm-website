@@ -15,11 +15,11 @@ type Route
 matchers : Parser (Route -> a) a
 matchers =
     oneOf
-        [ map MarkdownHomeRoute top
-        , map PlayerRoute (s "players" </> string)
-        , map PlayersRoute (s "players")
-        , map MarkdownHomeRoute (s "markdown")
-        , map MarkdownRoute (s "markdown" </> string)
+        [ map MarkdownHomeRoute (s "vg100" </> top)
+        , map PlayerRoute (s "vg100" </> s "players" </> string)
+        , map PlayersRoute (s "vg100" </> s "players")
+        , map MarkdownHomeRoute (s "vg100" </> s "markdown")
+        , map MarkdownRoute (s "vg100" </> s "markdown" </> string)
         ]
 
 
@@ -37,19 +37,19 @@ pathFor : Route -> String
 pathFor route =
     case route of
         PlayersRoute ->
-            "/players"
+            "/vg100/players"
 
         PlayerRoute id ->
-            "/players/" ++ id
+            "/vg100/players/" ++ id
 
         MarkdownHomeRoute ->
-            "/"
+            "/vg100"
 
         MarkdownRoute name ->
-            "/markdown/" ++ name
+            "/vg100/markdown/" ++ name
 
         NotFoundRoute ->
-            "/"
+            "/vg100"
 
 
 playersPath =
