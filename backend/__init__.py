@@ -16,7 +16,7 @@ from backend import api
 
 build_dir = os.path.join(os.path.dirname(app.instance_path), 'build')
 
-@app.route('%s' % url_prefix)
+@app.route('%s/' % url_prefix)
 @app.route('%s/markdown/' % url_prefix)
 @app.route('%s/markdown/<path:name>' % url_prefix)
 def show_main(name = ''):
