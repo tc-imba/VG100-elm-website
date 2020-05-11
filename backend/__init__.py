@@ -5,7 +5,7 @@ import os
 url_prefix = os.getenv('PUBLIC_URL', '')
 
 app = Flask(__name__, static_folder='../build/static', static_url_path='%s/static' % url_prefix)
-cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+cors = CORS(app, resources={r"*": {"origins": "*"}})
 
 app.config.from_object('backend.config')
 
@@ -32,14 +32,11 @@ def show_main_assets(name):
     return send_from_directory(build_dir, name)
 
 
-@app.route('%s/demo/<project>' % url_prefix)
+@app.route('%s/demo/<project>/' % url_prefix)
 @app.route('%s/demo/<project>/<path:name>' % url_prefix)
-def show_project_demo(project, name = ''):
-    repos_dir = os.path.join(os.path.dirname(app.instance_path), 'repos', project)
-    if name == '':
-        filename = os.path.join(project, 'index.html')
-    else:
-        filename = os.path.join(project, name)
+def show_project_demo(project, name = 'index.html'):
+    repos_dir = os.path.join(os.path.dirname(app.instance_path), 'repos', project, 'build')
+    print(os.path.join(repos_dir, name))
     return send_from_directory(repos_dir, name)
 
 #@app.route('/static/<path:name>', methods=['GET'])

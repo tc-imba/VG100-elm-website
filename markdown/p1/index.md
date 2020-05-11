@@ -1,3 +1,3 @@
 # Project 1
 
-[demo](/project/1/demo/p1teamta)
+[demo](/demo/p1teamta)

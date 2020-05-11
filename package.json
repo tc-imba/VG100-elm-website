@@ -7,7 +7,6 @@
     "test": "tests"
   },
   "scripts": {
-    "api": "json-server --watch db.json --port 4000",
     "start": "elm-app start",
     "build": "elm-app build",
     "test": "elm-app test"
@@ -20,8 +19,5 @@
     "material-icons": "^0.3.1",
     "normalize.css": "^8.0.1",
     "typeface-roboto": "0.0.75"
-  },
-  "devDependencies": {
-    "json-server": "^0.16.1"
   }
 }
