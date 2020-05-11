@@ -13,7 +13,7 @@ elm install evancz/elm-playground
 The elm package manager will automatically set up everything, and you should be able to find `"evancz/elm-playground": "1.0.3"`  in `elm.json` file in the project directory.
 
 To import the playground into your project, add
-```
+```elm
 import Playground exposing (..)
 ```
 at the beginning of your source code.
