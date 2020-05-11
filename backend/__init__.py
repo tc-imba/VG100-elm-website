@@ -2,11 +2,12 @@ from flask import Flask, request, send_from_directory, redirect
 from flask_cors import CORS
 import os
 
-app = Flask(__name__, static_folder='../build/static', static_url_path='/vg100/static')
+url_prefix = os.getenv('PUBLIC_URL', '')
+
+app = Flask(__name__, static_folder='../build/static', static_url_path='%s/static' % url_prefix)
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 app.config.from_object('backend.config')
-url_prefix = app.config['URL_PREFIX']
 
 # app.config.from_envvar('BACKEND_SETTINGS')
 
