@@ -31,10 +31,10 @@ def show_main_assets(name):
         return redirect('/')
     return send_from_directory(build_dir, name)
 
-
+# this is also dirty...
 @app.route('%s/demo/<project>' % url_prefix)
 def show_project_demo_redirect(project):
-    return redirect('%s/demo/%s/' % (url_prefix, project))
+    return redirect('/vg100/demo/%s/' % (url_prefix, project))
 
 @app.route('%s/demo/<project>/' % url_prefix)
 @app.route('%s/demo/<project>/<path:name>' % url_prefix)
