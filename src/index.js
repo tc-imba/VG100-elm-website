@@ -1,5 +1,5 @@
 import hljs from 'highlight.js';
-import 'highlight.js/styles/github.css'
+import 'highlight.js/styles/github-gist.css'
 window.hljs = hljs;
 
 import 'typeface-roboto'
