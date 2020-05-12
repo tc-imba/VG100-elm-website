@@ -67,9 +67,6 @@ You can use any IDE you want to develop `elm` projects. Here we will recommend s
 
 ### JetBrains WebStorm
 
-You can download the WebStorm IDE [here](https://www.jetbrains.com/webstorm/), or you can download the [Toolbox App](https://www.jetbrains.com/toolbox-app/) and install WebStorm in it. The Toolbox App can manage the updates of all Jetbrains IDEs, which is preferred by us.
-
-In order to use WebStorm for free, you need to register a JetBrains Account and apply for a [student license](https://www.jetbrains.com/shop/eform/students). If you have already used CLion in VG101, you can use the same account and do not need to apply again.
 
 Then you can install the [Elm plugin](https://plugins.jetbrains.com/plugin/10268-elm) in WebStorm. There will be a `Elm` block in Settings (or Preferences on macOS), you need to configure the path of `elm`, `elm-format` and `elm-test` installed by `npm`. If the auto detection failed on Windows, please ensure that `C:\Users\liu\AppData\Roaming\npm` is already in your environment variable `Path`, or you can select the files manually as shown in the example below.
 

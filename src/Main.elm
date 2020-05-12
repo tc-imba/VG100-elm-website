@@ -79,7 +79,7 @@ pageConfigList =
     , ( "md.env"
       , initPageConfig "Environment Setup"
             (markdownPrefix "env")
-            "/env/index.md"
+            "/env/home/index.md"
             [ ( "md.env.elm", initPageConfig "Elm Installation" (markdownPrefix "env.elm") "env/elm/index.md" [] )
             , ( "md.env.git", initPageConfig "Git" (markdownPrefix "env.git") "env/git/index.md" [] )
             , ( "md.env.redmine", initPageConfig "Redmine" (markdownPrefix "env.redmine") "env/redmine/index.md" [] )
