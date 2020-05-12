@@ -78,6 +78,10 @@ After everything is configured, there will be a popup (or notice) about selectin
 
 ### VSCode
 
+Search for `elmtooling.elm-ls-vscode` in the plugins.
+
+The author is `Elm tooling`.
+
 ### Sublime Text
 
 ### Atom
