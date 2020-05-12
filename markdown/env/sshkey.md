@@ -75,13 +75,14 @@ $ ls -al
 You should be able to find `id_rsa` and `id_rsa.pub`. Then, copy the public key `id_rsa.pub` to another directory, and change its name. Type
 
 ```bash
-$ cp id_rsa.pub ~/
-$ mv id_rsa.pub LastName_FirstName_StudentID.pub
+$ cp id_rsa.pub ~/LastName_FirstName_StudentID.pub
 ```
 
 For example, the filename can be `Zhang_San_519370910001.pub`.
 
 Finally, submit this file on Canvas.
+
+PS. If you are using Windows with git bash, the home directory `~` will be `C:\Users\Username`.
 
 **Important Note: Only submit your public key, i.e., the key with `.pub` suffix.**
 
