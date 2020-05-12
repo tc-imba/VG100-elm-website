@@ -26,7 +26,7 @@ We'll keep updating new tutorials on this website, if you have any idea, please 
 
 ### Collaborators
 
-+ Yue Yao, functional programming
++ Yue Yao ([tripack45](https://tripack45.github.io/)), [yueyao@cs.cmu.edu](mailto:yueyao@cs.cmu.edu), functional programming
 + Yihao Liu ([tc-imba](https://github.com/tc-imba/)) [liuyh970615@gmail.com](mailto:liuyh970615@gmail.com), web development
 
 ## Source Code
