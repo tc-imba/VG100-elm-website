@@ -62,7 +62,7 @@ update msg model =
 
 fetchMarkdown : Flags -> String -> Cmd Msg
 fetchMarkdown flags markdownName =
-    Http.getString (flags.api ++ "/api/markdown/" ++ markdownName)
+    Http.getString (flags.api ++ "/api/markdown/" ++ markdownName ++ "?v=" ++ flags.version)
         |> Http.send OnFetchMarkdown
 
 

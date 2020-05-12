@@ -11,6 +11,8 @@ import '../elm-mdc/elm-mdc'
 import 'github-markdown-css'
 import './main.css'
 
+import _package from '../package.json'
+
 import { Elm } from './Main.elm';
 import * as serviceWorker from './serviceWorker';
 
@@ -19,6 +21,7 @@ const devMode = env  !== 'production';
 
 const flags = {
   api: devMode ? "http://localhost:5000/vg100" : "/vg100",
+  version: _package.version
 }
 
 Elm.Main.init({
