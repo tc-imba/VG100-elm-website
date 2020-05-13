@@ -4,19 +4,15 @@ Using the SSH protocol, you can connect and authenticate to remote servers and s
 
 ## Step 1: Preparation
 
-### Windows 10
-
-You need Git Bash to generate SSH keys, first install [git for windows](https://gitforwindows.org/).
-
-If you've already installed `git` with `choco`, you can skip this step.
-
-### Linux / WSL
+### WSL (Windows Subsystem for Linux) or Linux Debian / Ubuntu
 
 In your terminal, install `openssh` using your package manager. For example, in Debian / Ubuntu, type
 
 ```bash
 $ sudo apt install openssh
 ```
+
+If you are using WSL, and also want to config the SSH directly in Windows, refer to the Further Readings.
 
 ### macOS
 
@@ -82,9 +78,21 @@ For example, the filename can be `Zhang_San_519370910001.pub`.
 
 Finally, submit this file on Canvas.
 
-PS. If you are using Windows with git bash, the home directory `~` will be `C:\Users\Username`.
+PS. In WSL, you may need to copy the file outside WSL. The file system of your Windows will be in the `/mnt` directory. For example, the path of Windows Desktop should be `/mnt/c/Users/Username/Desktop` in WSL.
 
 **Important Note: Only submit your public key, i.e., the key with `.pub` suffix.**
+
+## Further Readings
+
+### Windows 10
+
+You can also to generate SSH keys with Git Bash, first install [git for windows](https://gitforwindows.org/).
+
+If you've already installed `git` with `choco`, you can skip this step.
+
+Then you can open the Git Bash to perform the same procedures, the home directory `~` will be `C:\Users\Username`.
+
+You can also copy the `~/.ssh` folder in WSL into `C:\Users\Username\.ssh` so that everything will work on git bash without any other configuration.
 
 ## Reference
 

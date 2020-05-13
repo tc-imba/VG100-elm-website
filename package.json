@@ -1,6 +1,6 @@
 {
   "name": "vg100-elm-website",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "This project is bootstrapped with [Create Elm App](https://github.com/halfzebra/create-elm-app).",
   "main": "index.js",
   "directories": {

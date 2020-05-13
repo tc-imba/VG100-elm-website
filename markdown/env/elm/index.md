@@ -10,28 +10,25 @@ This tutorial will first introduce the installation of `nodejs` on different ope
 
 If you don't know what's a package manager (such as `apt`, `pacman`, `brew`, `choco`), you can download The `nodejs` installer from [nodejs.org](https://nodejs.org/en/download/). You'd better choose the LTS (Long Term Support) version, which is more stable than others. Then you can skip this section, the rest are all about how to install `nodejs` with package managers.
 
-If you are using a package manager, or are going to use one, follow this [guide](https://nodejs.org/en/download/package-manager/). We also list the commands in some major operating systems.
+If you are using a package manager , or are going to use one (**recommended**), follow this [guide](https://nodejs.org/en/download/package-manager/). We also list the commands in some major operating systems.
 
-### Windows
-
-We recommend [Chocolatey](https://chocolatey.org/) as a package manager on Windows.
+### WSL (Windows Subsystem for Linux) or Linux Debian / Ubuntu
 
 ```bash
-choco install -y nodejs-lts
+$ sudo apt update
+$ sudo apt install nodejs npm
 ```
 
-
-### WSL (Windows Subsystem for Linux) or Linux Debian/Ubuntu
+### Arch Linux / Manjaro
 
 ```bash
-sudo apt update
-sudo apt install nodejs npm
+$ sudo pacman -Syyu nodejs npm
 ```
 
 ### macOS
 
 ```bash
-brew install node
+$ brew install node
 ```
 
 ## Install Elm with npm
@@ -39,8 +36,8 @@ brew install node
 After you have installed `nodejs`, open the terminal and type
 
 ```bash
-node --version
-npm --version
+$ node --version
+$ npm --version
 ```
 
 If your installation is successful, these commands should output the version of `nodejs` and `npm`. The recommended versions are `nodejs>=12.x.x` and `npm>=5.x.x`.
@@ -50,13 +47,13 @@ If either of the command failed, there should be some problem with your environm
 In China, the connection to `npm` official registry may be very slow, you can set the registry to taobao by
 
 ```bash
-npm config set registry https://registry.npm.taobao.org
+$ npm config set registry https://registry.npm.taobao.org
 ```
 
 Then you can use `npm` to install these packages
 
 ```bash
-npm install -g elm elm-format elm-test
+$ npm install -g elm elm-format elm-test
 ```
 
 The binaries are downloaded from GitHub. If you failed to install the packages, try the [SJTU VPN](https://net.sjtu.edu.cn/wlfw/VPN.htm).
@@ -67,12 +64,25 @@ You can use any IDE you want to develop `elm` projects. Here we will recommend s
 
 ### JetBrains WebStorm
 
+You can install the [Elm plugin](https://plugins.jetbrains.com/plugin/10268-elm) in WebStorm. There will be a `Elm` block in Settings (or Preferences on macOS), you need to configure the path of `elm`, `elm-format` and `elm-test` installed by `npm`.
 
-Then you can install the [Elm plugin](https://plugins.jetbrains.com/plugin/10268-elm) in WebStorm. There will be a `Elm` block in Settings (or Preferences on macOS), you need to configure the path of `elm`, `elm-format` and `elm-test` installed by `npm`. If the auto detection failed on Windows, please ensure that `C:\Users\liu\AppData\Roaming\npm` is already in your environment variable `Path`, or you can select the files manually as shown in the example below.
+After everything is configured, there will be a popup (or notice) about selecting the `elm.json` file. Note that you may need to run `elm make` before selecting `elm.json` if there exist dependencies that are not installed on your computer.
+
+#### Windows Issues
+
+Note that on Windows, you need to install `nodejs` and `elm` directly on Windows, not in WSL. You can use [Chocolatey](https://chocolatey.org/) as a package manager on Windows.
+
+```powershell
+choco install -y nodejs-lts
+```
+
+If you don't have `choco`, download the installer and install it directly.
+
+If the auto detection failed on Windows, please ensure that `C:\Users\liu\AppData\Roaming\npm` is already in your environment variable `Path`, or you can select the files manually as shown in the example below.
 
 ![img](/markdown/env/elm/webstorm.png "WebStorm")
 
-After everything is configured, there will be a popup (or notice) about selecting the `elm.json` file. Note that you may need to run `elm make` before selecting `elm.json` if there exist dependencies that are not installed on your computer.
+
 
 
 
