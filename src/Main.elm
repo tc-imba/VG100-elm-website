@@ -82,7 +82,7 @@ pageConfigList =
             "/env/home/index.md"
             [ ( "md.env.ssh", initPageConfig "SSH Key" (markdownPrefix "env.ssh") "env/sshkey.md" [] )
             , ( "md.env.elm", initPageConfig "Elm Installation" (markdownPrefix "env.elm") "env/elm/index.md" [] )
-            , ( "md.env.git", initPageConfig "Git and Redmine" (markdownPrefix "env.git") "env/git/index.md" [] )
+            , ( "md.env.git", initPageConfig "Git and Redmine" (markdownPrefix "env.git") "env/git-and-redmine/git.md" [] )
             ]
       )
     , ( "md.ref"

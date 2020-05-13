@@ -80,7 +80,7 @@ If you don't have `choco`, download the installer and install it directly.
 
 If the auto detection failed on Windows, please ensure that `C:\Users\liu\AppData\Roaming\npm` is already in your environment variable `Path`, or you can select the files manually as shown in the example below.
 
-![img](/markdown/env/elm/webstorm.png "WebStorm")
+![img](./webstorm.png "WebStorm")
 
 
 

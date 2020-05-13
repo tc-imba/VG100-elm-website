@@ -12,6 +12,7 @@ type alias Model =
     { mdc : Material.Model Msg
     , markdown : String
     , api : String
+    , markdownName : String
     }
 
 
@@ -20,17 +21,18 @@ type Msg
     | Mdc (Material.Msg Msg)
 
 
-defaultModel : String -> Model
-defaultModel api =
+defaultModel : String -> String -> Model
+defaultModel api markdownName =
     { mdc = Material.defaultModel
     , markdown = ""
     , api = api
+    , markdownName = markdownName
     }
 
 
 init : Flags -> String -> ( Model, Cmd Msg )
 init flags markdownName =
-    ( defaultModel flags.api
+    ( defaultModel flags.api markdownName
     , Cmd.batch
         [ fetchMarkdown flags markdownName
         , Material.init Mdc
@@ -70,12 +72,12 @@ fetchMarkdown flags markdownName =
 -- VIEWS
 
 
-injectLinks : String -> String -> String
-injectLinks markdown api =
+injectLinks : String -> Model -> String
+injectLinks markdown model =
     -- this is dirty! fix it later!
-    String.replace "(/markdown/" ("(" ++ api ++ "/api/markdown/") markdown
-        |> String.replace "(/demo/" ("(" ++ api ++ "/demo/")
-        |> String.replace "href=\"/demo/" ("href=\"" ++ api ++ "/demo/")
+    String.replace "](./" ("](" ++ model.api ++ "/api/markdown/" ++ model.markdownName ++ "/../") markdown
+        |> String.replace "(/demo/" ("(" ++ model.api ++ "/demo/")
+        |> String.replace "href=\"/demo/" ("href=\"" ++ model.api ++ "/demo/")
 
 myOptions : Markdown.Options
 myOptions =
@@ -93,5 +95,5 @@ view model =
         [ Markdown.toHtmlWith
             myOptions
             [ class "markdown-body" ]
-            (injectLinks model.markdown model.api)
+            (injectLinks model.markdown model)
         ]

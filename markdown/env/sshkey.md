@@ -14,6 +14,12 @@ $ sudo apt install openssh
 
 If you are using WSL, and also want to config the SSH directly in Windows, refer to the Further Readings.
 
+### Arch Linux / Manjaro
+
+```bash
+$ sudo pacman -Syyu openssh
+```
+
 ### macOS
 
 ```bash
