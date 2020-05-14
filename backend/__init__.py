@@ -1,4 +1,4 @@
-from flask import Flask, request, send_from_directory, redirect
+from flask import Flask, request, send_from_directory, redirect, make_response
 from flask_cors import CORS
 import os
 
@@ -21,7 +21,11 @@ build_dir = os.path.join(os.path.dirname(app.instance_path), 'build')
 @app.route('%s/markdown/' % url_prefix)
 @app.route('%s/markdown/<path:name>' % url_prefix)
 def show_main(name = ''):
-    return send_from_directory(build_dir, 'index.html')
+    response = make_response(send_from_directory(build_dir, 'index.html'))
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = '0'
+    return response
 
 
 @app.route('%s/<name>' % url_prefix)
