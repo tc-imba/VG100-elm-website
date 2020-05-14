@@ -167,3 +167,10 @@ choco install -y git
 
 and then git will be installed on your Windows after a while.
 
+
+## References
+
+1. [Wikipedia - Package Manager](https://en.wikipedia.org/wiki/Package_manager)
+2. [Wikipedia - IDE](https://en.wikipedia.org/wiki/Integrated_development_environment)
+3. [VE280 Tutorials](https://github.com/ve280/tutorials)
+4. [TUNA Mirrors](https://mirror.tuna.tsinghua.edu.cn)

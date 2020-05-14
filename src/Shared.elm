@@ -3,7 +3,16 @@ module Shared exposing (Flags, RemoteData(..), mapRemoteData)
 
 type alias Flags =
     { api : String
-    , version: String
+    , version: Version
+    }
+
+type alias Version =
+    { name : String
+    , timestamp : String
+    , version : String
+    , env : String
+    , git : String
+    , dirty : Bool
     }
 
 

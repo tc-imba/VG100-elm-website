@@ -348,7 +348,6 @@ viewSkeleton model html =
         [ viewDrawer model
         , styled Html.div
             [ Drawer.appContent
-            , TopAppBar.fixedAdjust
             , Typography.typography
             , css "width" "100%"
             ]
@@ -361,7 +360,7 @@ viewTopAppBar model =
     TopAppBar.view Mdc
         "my-top-app-bar"
         model.mdc
-        []
+        [ TopAppBar.fixed ]
         [ TopAppBar.section
             [ TopAppBar.alignStart ]
             [ TopAppBar.navigationIcon Mdc
@@ -392,6 +391,12 @@ viewDrawer model =
                 model.mdc
                 [ Lists.singleSelection, Lists.useActivated ]
                 (List.concat (List.map (\p -> drawerLink model.pageId p 0) pageConfigList))
+            ]
+        , styled Html.div
+            [ cs "version" ]
+            [ text ("Version: " ++ model.flags.version.version ++ " (" ++ model.flags.version.git ++ ")")
+            , Html.br [] []
+            , text ("Last build: " ++ model.flags.version.timestamp)
             ]
         ]
 

@@ -14,3 +14,10 @@ node_modules
 
 # Desktop Services Store on macOS
 .DS_Store
+
+yarn.lock
+package-lock.json
+
+build.*
+
+*.egg-info

@@ -12,12 +12,25 @@
 body {
     font-family: 'Source Sans Pro', 'Trebuchet MS', 'Lucida Grande', 'Bitstream Vera Sans', 'Helvetica Neue', sans-serif;
     margin: 0;
+    padding: 0;
     /*text-align: center;*/
     color: #293c4b;
+    /*display: flex;*/
+    height: 100vh;
+    /*overflow: hidden;*/
 }
 
 .content {
+    margin-top: 64px;
+    overflow: auto;
+    height: calc(100vh - 64px);
+}
 
+.version {
+    font-size: 14px;
+    text-align: center;
+    margin: 5px;
+    color: #808080;
 }
 
 h1 {
