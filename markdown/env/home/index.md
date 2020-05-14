@@ -9,6 +9,9 @@ In this tutorial, we will help you setup a basic development environment on your
 > -- <cite>[Wikipedia](https://en.wikipedia.org/wiki/Package_manager)</cite>
 
 In this course, a system-level package manager is **not mandatory**, but we strongly encourage you to install one.
++ On most Linux Distributions (including WSL), there is a shipped package manager.
++ On macOS, you need to install one yourselves.
++ On Windows, you should use WSL in this course, but you can also choose to install a package manager for advanced usages.
 
 
 ### Windows 10 with WSL (Windows Subsystem for Linux)

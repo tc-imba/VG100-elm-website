@@ -55,14 +55,16 @@ img {
 .markdown-body {
     box-sizing: border-box;
     min-width: 200px;
-    max-width: 980px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 45px;
+    font-size: 18px;
 }
 
 @media (max-width: 767px) {
     .markdown-body {
         padding: 15px;
+        font-size: 16px;
     }
 }
 
