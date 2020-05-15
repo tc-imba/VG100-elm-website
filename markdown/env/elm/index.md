@@ -79,6 +79,11 @@ Then you can use `npm` to install these packages
 $ npm install -g elm elm-format elm-test
 ```
 
+If you have permission errors, use
+```bash
+$ npm install -g elm elm-format elm-test --unsafe-perm
+```
+
 The binaries are downloaded from GitHub. If you failed to install the packages, try the [SJTU VPN](https://net.sjtu.edu.cn/wlfw/VPN.htm).
 
 ## IDE Configuration

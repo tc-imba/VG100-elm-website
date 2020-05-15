@@ -41,6 +41,7 @@ Check whether you already have `id_rsa` and `id_rsa.pub`.
 
 1. If these files exist, go to step 4.
 2. If `.ssh` directory does not exist, or it's empty. For example, if the output is
+
 ```bash
 ls: cannot access '.ssh': No such file or directory
 ```
