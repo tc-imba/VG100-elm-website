@@ -77,6 +77,15 @@ $ ls -al
 
 You should be able to find `id_rsa` and `id_rsa.pub`. Then, copy the public key `id_rsa.pub` to another directory, and change its name. Type
 
+On WSL, you may need to copy the file outside WSL. The file system of your Windows will be in the `/mnt` directory. For example, the path of Windows Desktop should be `/mnt/c/Users/Username/Desktop` in WSL.
+
+```bash
+$ cd /mnt/c/Users/Username/Desktop
+$ cp ~/.ssh/id_rsa.pub ./LastName_FirstName_StudentID.pub
+```
+
+On Linux / macOS
+
 ```bash
 $ cp id_rsa.pub ~/LastName_FirstName_StudentID.pub
 ```
@@ -84,8 +93,6 @@ $ cp id_rsa.pub ~/LastName_FirstName_StudentID.pub
 For example, the filename can be `Zhang_San_519370910001.pub`.
 
 Finally, submit this file on Canvas.
-
-PS. In WSL, you may need to copy the file outside WSL. The file system of your Windows will be in the `/mnt` directory. For example, the path of Windows Desktop should be `/mnt/c/Users/Username/Desktop` in WSL.
 
 **Important Note: Only submit your public key, i.e., the key with `.pub` suffix.**
 
