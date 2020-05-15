@@ -9,7 +9,8 @@ Using the SSH protocol, you can connect and authenticate to remote servers and s
 In your terminal, install `openssh` using your package manager. For example, in Debian / Ubuntu, type
 
 ```bash
-$ sudo apt install openssh
+$ sudo apt update
+$ sudo apt install openssh-server
 ```
 
 If you are using WSL, and also want to config the SSH directly in Windows, refer to the Further Readings.
