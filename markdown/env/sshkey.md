@@ -113,6 +113,75 @@ Then you can open the Git Bash to perform the same procedures, the home director
 
 You can also copy the `~/.ssh` folder in WSL into `C:\Users\Username\.ssh` so that everything will work on git bash without any other configuration.
 
+
+### SSH Server in WSL
+
+The default SSH Server may not be configured correctly in WSL. You can check it by
+
+```bash
+$ sudo service ssh stop
+$ sudo /usr/sbin/sshd -d
+```
+
+Check the startup logs and make sure HostKeys are available and you don't see log messages such as:
+
+```
+debug1: sshd version OpenSSH_7.2, OpenSSL 1.0.2g  1 Mar 2016
+debug1: key_load_private: incorrect passphrase supplied to decrypt private key
+debug1: key_load_public: No such file or directory
+Could not load host key: /etc/ssh/ssh_host_rsa_key
+debug1: key_load_private: No such file or directory
+debug1: key_load_public: No such file or directory
+Could not load host key: /etc/ssh/ssh_host_dsa_key
+debug1: key_load_private: No such file or directory
+debug1: key_load_public: No such file or directory
+Could not load host key: /etc/ssh/ssh_host_ecdsa_key
+debug1: key_load_private: No such file or directory
+debug1: key_load_public: No such file or directory
+Could not load host key: /etc/ssh/ssh_host_ed25519_key
+```
+
+If you do see such messages and the keys are missing under /etc/ssh/, you will have to regenerate the keys or just purge & install `openssh-server`:
+
+```bash
+$ sudo apt purge openssh-server
+$ sudo apt install openssh-server
+```
+
+Also, you may also need to configure the ssh server in `/etc/ssh/sshd_config` with `vi` or `nano`.
+
+Find the lines
+```
+PermitRootLogin no
+PasswordAuthentication no
+```
+
+Change them to
+```
+PermitRootLogin yes
+PasswordAuthentication yes
+```
+
+This will enable root login and password login which is usually useful.
+
+Then
+```
+$ sudo service ssh restart
+$ sudo service ssh status
+```
+
+If you want to login with root by password, you need to set a password first:
+```
+$ sudo passwd root
+```
+
+You should now be able to connect to WSL on your Git Bash:
+```
+$ ssh root@localhost
+```
+
 ## Reference
 
-1. [Connecting to GitHub with SSH](https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh).
+1. [Connecting to GitHub with SSH](https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh)
+2. [Open SSH Service in WSL](https://blog.csdn.net/zhouzme/article/details/81087837)
+3. [WSL Troubleshooting](https://docs.microsoft.com/en-us/windows/wsl/troubleshooting)
