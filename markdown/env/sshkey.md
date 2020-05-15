@@ -152,7 +152,7 @@ You may also need to configure the ssh server in `/etc/ssh/sshd_config` with `vi
 
 Find the lines
 ```
-PermitRootLogin no
+PermitRootLogin no/prohibit-password
 PasswordAuthentication no
 ```
 
