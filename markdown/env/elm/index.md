@@ -12,6 +12,29 @@ If you don't know what's a package manager (such as `apt`, `pacman`, `brew`, `ch
 
 If you are using a package manager , or are going to use one (**recommended**), follow this [guide](https://nodejs.org/en/download/package-manager/). We also list the commands in some major operating systems.
 
+### NVM (All WSL / Linux / macOS)
+
+[nvm](https://github.com/nvm-sh/nvm) is the node version manager, you can install it with
+
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+```
+
+This script will install `nvm` for you, and append some lines to your `.bashrc` or `.zshrc` file.
+
+**Restart the shell**, and then you can install `nodejs` v12 with
+```bash
+nvm install 12
+```
+
+If you can't use `nvm`, you can use your `rc` file whether something like these lines exist in the end. If not, please ass them.
+
+```bash
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+```
+
 ### WSL (Windows Subsystem for Linux) or Linux Debian / Ubuntu
 
 ```bash
