@@ -148,7 +148,7 @@ $ sudo apt purge openssh-server
 $ sudo apt install openssh-server
 ```
 
-You may also need to configure the ssh server in `/etc/ssh/sshd_config` with `vi` or `nano`.
+You may also need to configure the ssh server in `/etc/ssh/sshd_config` with `vi` or `nano` (use `sudo` for root privilege).
 
 Find the lines
 ```
@@ -165,18 +165,18 @@ PasswordAuthentication yes
 This will enable root login and password login which is usually useful.
 
 Then
-```
+```bash
 $ sudo service ssh restart
 $ sudo service ssh status
 ```
 
 If you want to login with root by password, you need to set a password first:
-```
+```bash
 $ sudo passwd root
 ```
 
 You should now be able to connect to WSL on your Git Bash:
-```
+```bash
 $ ssh root@localhost
 ```
 
