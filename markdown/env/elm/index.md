@@ -79,9 +79,24 @@ Then you can use `npm` to install these packages
 $ npm install -g elm elm-format elm-test
 ```
 
+### WSL / Linux
+
 If you have permission errors, use
 ```bash
 $ sudo npm install -g elm elm-format elm-test --unsafe-perm
+```
+
+### Windows
+
+If you meet errors about `ExecutionPolicy` like on PowerShell
+```
+C:\Users\liu\AppData\Roaming\npm\elm-format.ps1，因为在此系统上禁止运行脚本。有关详细信息，请参阅
+https:/go.microsoft.com/fwlink/?LinkID=135170 中的 about_Execution_Policies。
+```
+
+Try to use
+```powershell
+Set-ExecutionPolicy Bypass -Scope Process
 ```
 
 The binaries are downloaded from GitHub. If you failed to install the packages, try the [SJTU VPN](https://net.sjtu.edu.cn/wlfw/VPN.htm).
