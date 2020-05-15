@@ -40,7 +40,11 @@ $ ls -al ~/.ssh
 Check whether you already have `id_rsa` and `id_rsa.pub`.
 
 1. If these files exist, go to step 4.
-1. If `.ssh` directory does not exist, or it's empty, go to step 3.
+2. If `.ssh` directory does not exist, or it's empty. For example, if the output is
+```bash
+ls: cannot access '.ssh': No such file or directory
+```
+or it's empty, go to step 3.
 
 ## Step 3: Generate a new SSH key
 
