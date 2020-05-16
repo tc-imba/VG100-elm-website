@@ -105,7 +105,7 @@ Finally, submit this file on Canvas.
 
 ### Windows 10
 
-You can also to generate SSH keys with Git Bash, first install [git for windows](https://gitforwindows.org/).
+You can also generate SSH keys with Git Bash, first install [git for windows](https://gitforwindows.org/).
 
 If you've already installed `git` with `choco`, you can skip this step.
 
