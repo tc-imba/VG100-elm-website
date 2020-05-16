@@ -92,6 +92,7 @@ pageConfigList =
             [ ( "md.ref.playground", initPageConfig "Elm Playground" (markdownPrefix "ref.playground") "ref/playground.md" [] )
             ]
       )
+    , ( "md.hw", initPageConfig "Homework" (markdownPrefix "hw") "hw/index.md" [] )
     , ( "md.p1", initPageConfig "Project 1" (markdownPrefix "p1") "p1/index.md" [] )
     , ( "md.p2", initPageConfig "Project 2" (markdownPrefix "p2") "p2/index.md" [] )
     ]

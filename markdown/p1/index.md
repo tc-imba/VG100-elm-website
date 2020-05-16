@@ -1,6 +1,5 @@
 # Project 1
 
-<a href="/demo/p1teamta/" target="_blank">Demo1</a> (by Shixin Song)
-
-<a href="/demo/p1teamta-new/" target="_blank">Demo2</a> (by Li Shi)
++ [Demo 1](/demo/p1teamta/) (by Shixin Song)
++ [Demo 2](/demo/p1teamta-new/) (by Li Shi)
 

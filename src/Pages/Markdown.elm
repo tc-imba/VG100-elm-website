@@ -75,9 +75,11 @@ fetchMarkdown flags markdownName =
 injectLinks : String -> Model -> String
 injectLinks markdown model =
     -- this is dirty! fix it later!
-    String.replace "](./" ("](" ++ model.api ++ "/api/markdown/" ++ model.markdownName ++ "/../") markdown
+    markdown
+        |> String.replace "](./" ("](" ++ model.api ++ "/api/markdown/" ++ model.markdownName ++ "/../")
+        --|> String.replace "href=\"./" ("href=\"" ++ model.api ++ "/api/markdown/" ++ model.markdownName ++ "/../")
         |> String.replace "(/demo/" ("(" ++ model.api ++ "/demo/")
-        |> String.replace "href=\"/demo/" ("href=\"" ++ model.api ++ "/demo/")
+        --|> String.replace "href=\"/demo/" ("href=\"" ++ model.api ++ "/demo/")
 
 myOptions : Markdown.Options
 myOptions =

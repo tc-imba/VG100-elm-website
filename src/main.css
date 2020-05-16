@@ -85,3 +85,6 @@ img {
     /*--mdc-theme-primary: #018786;*/
 }
 
+.markdown-body li pre {
+    margin-top: 10px;
+}
