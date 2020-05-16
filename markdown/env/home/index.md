@@ -21,7 +21,7 @@ If you want to work on Windows in this course, you should use WSL (Windows Subsy
 Ensure that you are using an administrative shell. Press Win+X, you will find `Windows PowerShell (Administrator)`, and paste
 
 ```powershell
-Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 ```
 
 This will enable WSL as a service. Then you will be asked to reboot the system.
@@ -31,6 +31,32 @@ After the reboot, open the Windows Store and search for `Ubuntu` with a version,
 You can refer to https://docs.microsoft.com/en-us/windows/wsl/install-win10 if meeting any problems.
 
 After the installation, start `Ubuntu` in the start menu, and follow the instruction below.
+
+### Windows 10 with WSL 2
+
+**Note: WSL 2 is still under development (preview status), and may have more bugs than WSL 1. But it provides a real Linux Kernel instead of WSL 1 which provides only an ABI compatible version.**
+
+To update to WSL 2, you must meet the follow criteria:
+
+Running Windows 10, updated to version 2004, **Build 19041** or higher. Press Win+R, and type `winver`, and press enter, you can check your Windows version.
+
+If the version is lower than the requirement, you need to update the system. You may visit https://insider.windows.com and become an insider so that you can update to version 2004.
+
+If the version meets the requirement, type the command in an administrative shell.
+
+```powershell
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+```
+
+**Restart** your machine to complete the WSL install and update to WSL 2.
+
+Run the following command in PowerShell to set WSL 2 as the default version when installing a new Linux distribution:
+
+```powershell
+wsl --set-default-version 2
+```
+
+Then you can install any Linux Distribution you like as in WSL 1.
 
 ### Linux Debian / Ubuntu
 
