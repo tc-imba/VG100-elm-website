@@ -91,6 +91,33 @@ echo $?    # exit code from the previous command
 
 Anything following `#` is a comment. The `1`, `2`, `@`, `?` are predefined variables in a shell.
 
+### I/O Redirection and Pipeline
+
+You can use I/O redirection on shell, usually the `stdin` and `stdout` are redirected.
+
+```bash
+cat < input.txt                 # print the file input.txt
+cat input.txt                   # same as the above line
+cat <<< input.txt               # print the string "input.txt"
+head input.txt > output.txt     # save first 10 lines of input.txt in output.txt
+head input.txt >> output.txt    # similar to the above line, but append contents to output.txt
+```
+
+Some conclusions:
++ `<` redirect `stdin` with the file
++ `<<<` redirect `stdin` with the string
++ `>` redirect `stdout` and overwrite the file
++ `>>` redirect `stdout` and append contents to the file
+
+You can also use pipeline `|` for I/O redirection, it will connect the `stdout` of the left command and the `stdin` of the right command.
+
+```bash
+cat cmd.txt | grep ls | wc -l
+```
+
+This command means that, first we use the `stdout` of `cat cmt.txt` as the `stdin` of `grep ls` to find the lines with the string `ls`, then we use the `stdout` of `grep ls` as the `stdin` of `wc -l` to count the number of lines.
+
+
 ### Quotes
 
 Single and Double Quotes can be used. The difference:
