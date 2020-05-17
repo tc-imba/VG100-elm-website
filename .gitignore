@@ -22,3 +22,6 @@ package-lock.json
 *.stderr
 
 *.egg-info
+__pycache__
+repos
+venv

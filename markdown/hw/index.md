@@ -21,3 +21,8 @@ If you can clone the repo inside WSL, but can't clone it on Git Bash, you should
 + [bashcrawl.tar.bz2](./h1/bashcrawl.tar.bz2)
 + [cmd.txt](./h1/cmd.txt)
 
+PS. You can unzip the `.tar.bz2` file with the command
+```bash
+tar -jxvf filename.tar.bz2
+```
+
