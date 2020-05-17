@@ -192,7 +192,7 @@ Refer to bash man page for more advanced operations on variables, eg.,
 
 ```bash
 a="123 4.jpg";
-echo ${a%.jpg} ${a:2,3} # extract partial content from variable a
+echo ${a%.jpg} ${a:2:3} # extract partial content from variable a
 echo ${#a}              # get the length of variable a
 ```
 

@@ -21,8 +21,16 @@ If you can clone the repo inside WSL, but can't clone it on Git Bash, you should
 + [bashcrawl.tar.bz2](./h1/bashcrawl.tar.bz2)
 + [cmd.txt](./h1/cmd.txt)
 
+On macOS, the `sed` command is different from GNU-Linux `sed`, so you may need to install `gnu-sed` package on `brew`, then you can try the command with `gsed` instead of `sed`.
+```bash
+$ brew install gnu-sed
+$ gsed 's/\([^ ]\+\)[[:space:]]*\(.*\)/\1 -> \2/g' cmd.txt
+```
+
 PS. You can unzip the `.tar.bz2` file with the command
 ```bash
-tar -jxvf filename.tar.bz2
+$ tar -jxvf filename.tar.bz2
 ```
+
+
 
