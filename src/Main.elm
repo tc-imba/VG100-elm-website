@@ -90,6 +90,7 @@ pageConfigList =
             (markdownPrefix "ref")
             "env/ref/index.md"
             [ ( "md.ref.playground", initPageConfig "Elm Playground" (markdownPrefix "ref.playground") "ref/playground.md" [] )
+            , ( "md.ref.shell", initPageConfig "Shell Scripting" (markdownPrefix "ref.shell") "ref/shell.md" [] )
             ]
       )
     , ( "md.hw", initPageConfig "Homework" (markdownPrefix "hw") "hw/index.md" [] )
