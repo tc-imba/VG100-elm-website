@@ -2,7 +2,13 @@
 
 These homework files are also available on the git server. If you want to clone the homework repo with `git`, follow the steps:
 
-1. Open your terminal and locate to the directory where you want to clone the homework files, eg., if I want to put everything in `~/VG100`, type `cd ~/VG100`.
+1. Open your terminal and locate to the directory where you want to clone the homework files.
+  Eg., if you want to put everything in `~/VG100`, type
+```bash
+mkdir -p ~/VG100
+cd ~/VG100
+```
+This will create a directory called `VG100` in `~` (home directory) if it doesn't exist (the `-p` flag does nothing if the directory already exists), and change the working directory into it.
 
 2. Use the `git clone` command to clone the homework repository:
 ```bash
