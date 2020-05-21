@@ -17,6 +17,7 @@ import Material.Typography as Typography
 import Pages.Edit as Edit
 import Pages.List as List
 import Pages.Markdown as Markdown
+import Pages.SourceCode as SourceCode
 import Routes exposing (Route)
 import Shared exposing (..)
 import Url exposing (Url)
@@ -38,6 +39,7 @@ type Page
     | PageList List.Model
     | PageEdit Edit.Model
     | PageMarkdown Markdown.Model
+    | PageSourceCode SourceCode.Model
 
 
 type alias PageID =
@@ -94,6 +96,7 @@ pageConfigList =
             ]
       )
     , ( "md.hw", initPageConfig "Homework" (markdownPrefix "hw") "hw/index.md" [] )
+    , ( "md.lecture", initPageConfig "Lecture" (markdownPrefix "lecture") "lecture/index.md" [] )
     , ( "md.p1", initPageConfig "Project 1" (markdownPrefix "p1") "p1/index.md" [] )
     , ( "md.p2", initPageConfig "Project 2" (markdownPrefix "p2") "p2/index.md" [] )
     ]
@@ -121,6 +124,7 @@ type Msg
     | ListMsg List.Msg
     | EditMsg Edit.Msg
     | MarkdownMsg Markdown.Msg
+    | SourceCodeMsg SourceCode.Msg
     | Mdc (Material.Msg Msg)
     | ToggleDrawer
 
@@ -194,6 +198,13 @@ loadCurrentPage ( model, cmd ) =
                     in
                     ( PageMarkdown pageModel, pageId_, Cmd.map MarkdownMsg pageCmd )
 
+                Routes.SourceCodeRoute srcPath ->
+                    let
+                        ( pageModel, pageCmd ) =
+                            SourceCode.init model.flags srcPath
+                    in
+                    ( PageSourceCode pageModel, "src", Cmd.map SourceCodeMsg pageCmd )
+
                 Routes.NotFoundRoute ->
                     ( PageNone, "none", Cmd.none )
     in
@@ -213,6 +224,9 @@ subscriptions model =
 
                 PageMarkdown pageModel ->
                     Sub.map MarkdownMsg (Markdown.subscriptions pageModel)
+
+                PageSourceCode pageModel ->
+                    Sub.map SourceCodeMsg (SourceCode.subscriptions pageModel)
 
                 PageNone ->
                     Sub.none
@@ -285,6 +299,17 @@ update msg model =
         ( MarkdownMsg subMsg, _ ) ->
             ( model, Cmd.none )
 
+        ( SourceCodeMsg subMsg, PageSourceCode pageModel ) ->
+            let
+                ( newPageModel, newCmd ) =
+                    SourceCode.update subMsg pageModel
+            in
+            ( { model | page = PageSourceCode newPageModel }
+            , Cmd.map SourceCodeMsg newCmd
+            )
+
+        ( SourceCodeMsg subMsg, _ ) ->
+            ( model, Cmd.none )
 
 main : Program Flags Model Msg
 main =
@@ -325,6 +350,10 @@ currentPage model =
                 PageMarkdown pageModel ->
                     Markdown.view pageModel
                         |> Html.map MarkdownMsg
+
+                PageSourceCode pageModel ->
+                    SourceCode.view pageModel
+                        |> Html.map SourceCodeMsg
 
                 PageNone ->
                     notFoundView

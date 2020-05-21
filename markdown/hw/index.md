@@ -19,7 +19,7 @@ If you can clone the repo inside WSL, but can't clone it on Git Bash, you should
 
 + [h1.pdf](./h1/h1.pdf)
 + [bashcrawl.tar.bz2](./h1/bashcrawl.tar.bz2)
-+ [cmd.txt](./h1/cmd.txt)
++ [cmd.txt](./h1/cmd.txt) ([Preview](/src/hw/h1/cmd.txt))
 
 On macOS, the `sed` command is different from GNU-Linux `sed`, so you may need to install `gnu-sed` package on `brew`, then you can try the command with `gsed` instead of `sed`.
 ```bash

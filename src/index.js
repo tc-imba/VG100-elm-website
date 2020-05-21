@@ -21,7 +21,8 @@ const devMode = _version.env  !== 'production';
 console.log(_version);
 
 const flags = {
-  api: devMode ? "http://localhost:5000/vg100" : "/vg100",
+  api: devMode ? "http://localhost:5000" : "",
+  prefix: "/vg100",
   version: _version,
 }
 

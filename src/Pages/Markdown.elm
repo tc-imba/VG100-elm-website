@@ -11,7 +11,7 @@ import Shared exposing (..)
 type alias Model =
     { mdc : Material.Model Msg
     , markdown : String
-    , api : String
+    , flags : Flags
     , markdownName : String
     }
 
@@ -21,18 +21,18 @@ type Msg
     | Mdc (Material.Msg Msg)
 
 
-defaultModel : String -> String -> Model
-defaultModel api markdownName =
+defaultModel : Flags -> String -> Model
+defaultModel flags markdownName =
     { mdc = Material.defaultModel
     , markdown = ""
-    , api = api
+    , flags = flags
     , markdownName = markdownName
     }
 
 
 init : Flags -> String -> ( Model, Cmd Msg )
 init flags markdownName =
-    ( defaultModel flags.api markdownName
+    ( defaultModel flags markdownName
     , Cmd.batch
         [ fetchMarkdown flags markdownName
         , Material.init Mdc
@@ -64,7 +64,7 @@ update msg model =
 
 fetchMarkdown : Flags -> String -> Cmd Msg
 fetchMarkdown flags markdownName =
-    Http.getString (flags.api ++ "/api/markdown/" ++ markdownName ++ "?v=" ++ flags.version.git)
+    Http.getString (flags.api ++ flags.prefix ++ "/api/markdown/" ++ markdownName ++ "?v=" ++ flags.version.git)
         |> Http.send OnFetchMarkdown
 
 
@@ -76,10 +76,11 @@ injectLinks : String -> Model -> String
 injectLinks markdown model =
     -- this is dirty! fix it later!
     markdown
-        |> String.replace "](./" ("](" ++ model.api ++ "/api/markdown/" ++ model.markdownName ++ "/../")
+        |> String.replace "](./" ("](" ++ model.flags.api ++ model.flags.prefix ++ "/api/markdown/" ++ model.markdownName ++ "/../")
         --|> String.replace "href=\"./" ("href=\"" ++ model.api ++ "/api/markdown/" ++ model.markdownName ++ "/../")
-        |> String.replace "(/demo/" ("(" ++ model.api ++ "/demo/")
-        --|> String.replace "href=\"/demo/" ("href=\"" ++ model.api ++ "/demo/")
+        |> String.replace "(/demo/" ("(" ++ model.flags.api ++ model.flags.prefix ++ "/demo/")
+        |> String.replace "(/src/" ("(" ++ model.flags.prefix ++ "/src/")
+
 
 myOptions : Markdown.Options
 myOptions =
