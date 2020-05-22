@@ -95,8 +95,9 @@ pageConfigList =
             , ( "md.ref.shell", initPageConfig "Shell Scripting" (markdownPrefix "ref.shell") "ref/shell.md" [] )
             ]
       )
-    , ( "md.hw", initPageConfig "Homework" (markdownPrefix "hw") "hw/index.md" [] )
     , ( "md.lecture", initPageConfig "Lecture" (markdownPrefix "lecture") "lecture/index.md" [] )
+    , ( "md.hw", initPageConfig "Homework" (markdownPrefix "hw") "hw/index.md" [] )
+    , ( "md.lab", initPageConfig "Lab" (markdownPrefix "lab") "lab/index.md" [] )
     , ( "md.p1", initPageConfig "Project 1" (markdownPrefix "p1") "p1/index.md" [] )
     , ( "md.p2", initPageConfig "Project 2" (markdownPrefix "p2") "p2/index.md" [] )
     ]
