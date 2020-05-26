@@ -89,10 +89,10 @@ getExtension filename =
             Regex.find extension filename
 
         firstMatch =
-            Maybe.withDefault (Regex.Match "" 0 0 []) (List.head match)
+            Maybe.withDefault (Regex.Match "" 0 0 []) <| List.head match
 
         firstSubMatch =
-            Maybe.withDefault (Just "txt") (List.head firstMatch.submatches)
+            Maybe.withDefault (Just "txt") <| List.head firstMatch.submatches
 
         result =
             Maybe.withDefault "txt" firstSubMatch
