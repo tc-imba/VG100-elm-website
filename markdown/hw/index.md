@@ -42,4 +42,3 @@ $ tar -jxvf filename.tar.bz2
 
 + [h2.pdf](./h2.pdf)
 
-

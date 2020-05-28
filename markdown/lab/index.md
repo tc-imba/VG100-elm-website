@@ -15,3 +15,4 @@
 ## Lab 2, 3
 
 + [elm-workshop.tar.xz](./elm-workshop.tar.xz)
++ [Introduction-to-Elm-0.19.pdf](./Introduction-to-Elm-0.19.pdf)
