@@ -38,5 +38,8 @@ PS. You can unzip the `.tar.bz2` file with the command
 $ tar -jxvf filename.tar.bz2
 ```
 
+## Homework 2
+
++ [h2.pdf](./h2.pdf)
 
 

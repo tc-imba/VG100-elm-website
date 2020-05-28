@@ -12,3 +12,6 @@
 + [l1.pdf](./l1.pdf)
 + [elm-tetris.tar.xz](./../lecture/c2/elm-tetris.tar.xz)
 
+## Lab 2, 3
+
++ [elm-workshop.tar.xz](./elm-workshop.tar.xz)

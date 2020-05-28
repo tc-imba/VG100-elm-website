@@ -2,7 +2,7 @@ module.exports = {
   apps : [{
     name: 'vg100-elm-website',
     script: '.',
-    interpreter: 'python',
+    interpreter: 'python3',
     interpreter_args: '-m flask run -h 0.0.0.0 --extra-files',
     watch: '.',
     env: {
