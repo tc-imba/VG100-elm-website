@@ -9,5 +9,8 @@ setup(
         'flask>=1.1.1',
         'flask-cors',
         'gitpython',
+        'celery',
+        'redis',
+        'python-redis-lock',
     ],
 )

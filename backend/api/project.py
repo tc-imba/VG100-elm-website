@@ -1,11 +1,10 @@
 from backend import app, url_prefix
-from backend.utils import check_argument
-import git
+from backend.build import add_task
+# from backend.utils import check_argument
 import os
-import shutil
-import subprocess
 
 from flask import jsonify
+
 
 repos_config = app.config['REPOS']
 repos_list = []
@@ -21,21 +20,22 @@ repos_dir = os.path.abspath('repos')
 @app.route('%s/api/project/build/<name>' % url_prefix)
 # @check_argument("name")
 def build_project(name: str):
-    project_dir = os.path.join(repos_dir, name)
-
-    shutil.rmtree(project_dir, ignore_errors=True)
-
-    build_log_dir = os.path.join(project_dir, '.vg100.build')
-    code_file = os.path.join(build_log_dir, 'code')
-    stdout_file = os.path.join(build_log_dir, 'stdout')
-    stderr_file = os.path.join(build_log_dir, 'stderr')
-
-    repo = git.Git(repos_dir).clone('%s:%s' % (app.config['GIT_SERVER'], name))
-
-    with open(stdout_file, 'w') as out, open(stderr_file, 'w') as err:
-        subprocess.run("make", shell=True, cwd=project_dir, stdout=out, stderr=err)
-
-    print(repo)
+    add_task(name)
+    # project_dir = os.path.join(repos_dir, name)
+    #
+    # shutil.rmtree(project_dir, ignore_errors=True)
+    #
+    # build_log_dir = os.path.join(project_dir, '.vg100.build')
+    # code_file = os.path.join(build_log_dir, 'code')
+    # stdout_file = os.path.join(build_log_dir, 'stdout')
+    # stderr_file = os.path.join(build_log_dir, 'stderr')
+    #
+    # repo = git.Git(repos_dir).clone('%s:%s' % (app.config['GIT_SERVER'], name))
+    #
+    # with open(stdout_file, 'w') as out, open(stderr_file, 'w') as err:
+    #     subprocess.run("make", shell=True, cwd=project_dir, stdout=out, stderr=err)
+    #
+    # print(repo)
     return name
 
 
