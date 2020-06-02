@@ -10,6 +10,7 @@ type Route
     | MarkdownHomeRoute
     | MarkdownRoute String
     | SourceCodeRoute (List String)
+    | ProjectRoute String
     | NotFoundRoute
 
 
@@ -58,6 +59,7 @@ matchers =
         , map MarkdownHomeRoute (s "vg100" </> s "markdown")
         , map MarkdownRoute (s "vg100" </> s "markdown" </> string)
         , map SourceCodeRoute (s "vg100" </> s "src" </> rest)
+        , map ProjectRoute (s "vg100" </> s "project" </> string)
         ]
 
 
@@ -88,6 +90,9 @@ pathFor route =
 
         SourceCodeRoute array ->
             "/vg100/src/" ++ String.join "/" array
+
+        ProjectRoute name ->
+            "/vg100/project/" ++ name
 
         NotFoundRoute ->
             "/vg100"

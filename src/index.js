@@ -26,9 +26,13 @@ const flags = {
   version: _version,
 }
 
-Elm.Main.init({
+const app = Elm.Main.init({
   node: document.getElementById('root'),
   flags: flags,
+});
+
+app.ports.openWindow.subscribe(function(newSite) {
+    window.open(newSite);
 });
 
 // If you want your app to work offline and load faster, you can change

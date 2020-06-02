@@ -17,6 +17,7 @@ import Material.Typography as Typography
 import Pages.Edit as Edit
 import Pages.List as List
 import Pages.Markdown as Markdown
+import Pages.Project as Project
 import Pages.SourceCode as SourceCode
 import Routes exposing (Route)
 import Shared exposing (..)
@@ -40,6 +41,7 @@ type Page
     | PageEdit Edit.Model
     | PageMarkdown Markdown.Model
     | PageSourceCode SourceCode.Model
+    | PageProject Project.Model
 
 
 type alias PageID =
@@ -75,6 +77,11 @@ markdownPrefix name =
     "/vg100/markdown/" ++ name
 
 
+projectPrefix : String -> String
+projectPrefix name =
+    "/vg100/project/" ++ name
+
+
 pageConfigList : List ( PageID, PageConfig )
 pageConfigList =
     [ ( "md.home", pageConfigDefault )
@@ -98,8 +105,15 @@ pageConfigList =
     , ( "md.lecture", initPageConfig "Lecture" (markdownPrefix "lecture") "lecture/index.md" [] )
     , ( "md.hw", initPageConfig "Homework" (markdownPrefix "hw") "hw/index.md" [] )
     , ( "md.lab", initPageConfig "Lab" (markdownPrefix "lab") "lab/index.md" [] )
-    , ( "md.p1", initPageConfig "Project 1" (markdownPrefix "p1") "p1/index.md" [] )
-    , ( "md.p2", initPageConfig "Project 2" (markdownPrefix "p2") "p2/index.md" [] )
+    , ( "md.project"
+      , initPageConfig "Project"
+            (markdownPrefix "project")
+            "p1/index.md"
+            [ ( "project.p1", initPageConfig "Project 1" (projectPrefix "p1") "" [] )
+            ]
+      )
+
+    --, ( "md.p2", initPageConfig "Project 2" (markdownPrefix "p2") "p2/index.md" [] )
     ]
 
 
@@ -126,6 +140,7 @@ type Msg
     | EditMsg Edit.Msg
     | MarkdownMsg Markdown.Msg
     | SourceCodeMsg SourceCode.Msg
+    | ProjectMsg Project.Msg
     | Mdc (Material.Msg Msg)
     | ToggleDrawer
 
@@ -206,6 +221,13 @@ loadCurrentPage ( model, cmd ) =
                     in
                     ( PageSourceCode pageModel, "src", Cmd.map SourceCodeMsg pageCmd )
 
+                Routes.ProjectRoute projectName ->
+                    let
+                        ( pageModel, pageCmd ) =
+                            Project.init model.flags projectName
+                    in
+                    ( PageProject pageModel, "project", Cmd.map ProjectMsg pageCmd )
+
                 Routes.NotFoundRoute ->
                     ( PageNone, "none", Cmd.none )
     in
@@ -228,6 +250,9 @@ subscriptions model =
 
                 PageSourceCode pageModel ->
                     Sub.map SourceCodeMsg (SourceCode.subscriptions pageModel)
+
+                PageProject pageModel ->
+                    Sub.map ProjectMsg (Project.subscriptions pageModel)
 
                 PageNone ->
                     Sub.none
@@ -312,6 +337,19 @@ update msg model =
         ( SourceCodeMsg subMsg, _ ) ->
             ( model, Cmd.none )
 
+        ( ProjectMsg subMsg, PageProject pageModel ) ->
+            let
+                ( newPageModel, newCmd ) =
+                    Project.update subMsg pageModel
+            in
+            ( { model | page = PageProject newPageModel }
+            , Cmd.map ProjectMsg newCmd
+            )
+
+        ( ProjectMsg subMsg, _ ) ->
+            ( model, Cmd.none )
+
+
 main : Program Flags Model Msg
 main =
     Browser.application
@@ -355,6 +393,10 @@ currentPage model =
                 PageSourceCode pageModel ->
                     SourceCode.view pageModel
                         |> Html.map SourceCodeMsg
+
+                PageProject pageModel ->
+                    Project.view pageModel
+                        |> Html.map ProjectMsg
 
                 PageNone ->
                     notFoundView
