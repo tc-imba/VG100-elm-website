@@ -314,7 +314,7 @@ scrollableDialogBody model project =
     , Dialog.content
         [ Dialog.scrollable ]
         [ Html.h3 [] [ text "status: ", styled Html.span [ css "color" (getColorByStatus project.status) ] [ text project.status ] ]
-        , Html.h3 [] [ text ("return code: " ++ Debug.toString project.code) ]
+        , Html.h3 [] [ text ("return code: " ++ String.fromInt project.code) ]
         , Html.h3 [] [ text "stdout" ]
         , Html.p []
             [ wrapOutputMarkdown project.stdout ]
