@@ -9,6 +9,12 @@ module.exports = {
       'FLASK_APP': 'backend',
       'FLASK_ENV': 'production'
     }
+  }, {
+    name: 'vg100-elm-celery',
+    script: '.',
+    interpreter: 'python3',
+    interpreter_args: '-m celery worker --loglevel=info -c 1 -A backend.celery --workdir',
+    watch: '.',
   }],
 
   deploy : {

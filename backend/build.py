@@ -12,6 +12,16 @@ import redis_lock
 conn = redis.from_url(app.config['CELERY_BROKER_URL'])
 
 
+def refresh_task_set():
+    lock = redis_lock.Lock(conn, "vg100-elm-website-task-lock")
+    print('refresh task set')
+    if not lock.acquire(blocking=False):
+        lock.reset()
+        lock.acquire()
+    save_task_set(set())
+    lock.release()
+
+
 def get_task_set():
     data = conn.get('vg100-elm-website-task-set')
     if data is None:
@@ -24,25 +34,37 @@ def save_task_set(task_set):
     conn.set('vg100-elm-website-task-set', data)
 
 
-@celery.task
+@celery.task(soft_time_limit=120)
 def async_build_project(name):
     print('build start: %s' % name)
     # time.sleep(10)
+
+    repos_dir = os.path.abspath('repos')
+    project_dir = os.path.join(repos_dir, name)
+    build_log_dir = os.path.join(project_dir, '.vg100.build')
+    code_file = os.path.join(build_log_dir, 'code')
+    stdout_file = os.path.join(build_log_dir, 'stdout')
+    stderr_file = os.path.join(build_log_dir, 'stderr')
+
+    return_code = -1
     try:
-        repos_dir = os.path.abspath('repos')
-        project_dir = os.path.join(repos_dir, name)
         shutil.rmtree(project_dir, ignore_errors=True)
-
-        build_log_dir = os.path.join(project_dir, '.vg100.build')
-        code_file = os.path.join(build_log_dir, 'code')
-        stdout_file = os.path.join(build_log_dir, 'stdout')
-        stderr_file = os.path.join(build_log_dir, 'stderr')
-
+        print('git clone: %s' % name)
         repo = git.Git(repos_dir).clone('%s:%s' % (app.config['GIT_SERVER'], name))
+        os.makedirs(build_log_dir, exist_ok=True)
+
+        print('make: %s' % name)
+        with open(stdout_file, 'w') as out, open(stderr_file, 'w') as err:
+            p = subprocess.run("make", shell=True, cwd=project_dir, stdout=out, stderr=err)
+            return_code = p.returncode
+
+        with open(code_file, 'w') as out:
+            out.write(str(return_code))
 
     except Exception as e:
         print(e)
-        pass
+
+    print('build finish: %s (%d)' % (name, return_code))
 
     lock = redis_lock.Lock(conn, "vg100-elm-website-task-lock")
     lock.acquire()
@@ -62,6 +84,10 @@ def add_task(name):
         task_set.add(name)
         save_task_set(task_set)
         async_build_project.delay(name)
+        lock.release()
+        return True
     else:
         print('skip task: %s' % name)
-    lock.release()
+        lock.release()
+        return False
+

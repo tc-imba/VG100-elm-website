@@ -23,5 +23,7 @@ package-lock.json
 
 *.egg-info
 __pycache__
-repos
 venv
+
+repos
+!repos/.gitkeep

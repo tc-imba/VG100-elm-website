@@ -106,9 +106,9 @@ pageConfigList =
     , ( "md.hw", initPageConfig "Homework" (markdownPrefix "hw") "hw/index.md" [] )
     , ( "md.lab", initPageConfig "Lab" (markdownPrefix "lab") "lab/index.md" [] )
     , ( "md.project"
-      , initPageConfig "Project"
+      , initPageConfig "Project Submission"
             (markdownPrefix "project")
-            "p1/index.md"
+            "project.md"
             [ ( "project.p1", initPageConfig "Project 1" (projectPrefix "p1") "" [] )
             ]
       )

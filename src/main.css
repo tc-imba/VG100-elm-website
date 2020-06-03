@@ -81,10 +81,47 @@ img {
     }
 }
 
-:root {
-    /*--mdc-theme-primary: #018786;*/
+.project-body {
+    min-width: 200px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 45px;
 }
+
+@media (max-width: 767px) {
+    .project-bodyy {
+        padding: 15px;
+    }
+}
+
+.project-body .markdown-body {
+    padding: 10px;
+}
+
 
 .markdown-body li pre {
     margin-top: 10px;
+}
+
+.project-body .markdown-body li pre {
+    margin-top: 0;
+}
+
+@media (min-width: 767px) {
+    .mdc-dialog .mdc-dialog__surface {
+        min-width: 767px;
+        max-width: 767px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .mdc-dialog .mdc-dialog__surface {
+        min-width: 1200px;
+        max-width: 1200px;
+    }
+}
+
+
+:root {
+    /*--mdc-theme-primary: #018786;*/
 }
