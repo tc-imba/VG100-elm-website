@@ -34,7 +34,7 @@ def save_task_set(task_set):
     conn.set('vg100-elm-website-task-set', data)
 
 
-@celery.task(soft_time_limit=120)
+@celery.task(soft_time_limit=200)
 def async_build_project(name):
     print('build start: %s' % name)
     # time.sleep(10)
