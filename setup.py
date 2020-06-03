@@ -12,5 +12,6 @@ setup(
         'celery',
         'redis',
         'python-redis-lock',
+        'future'
     ],
 )
