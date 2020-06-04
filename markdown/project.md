@@ -18,6 +18,25 @@ For example, maybe a student `Just Salut` is in group 13 and doing project 1, th
 $ git clone ssh://git@focs.ji.sjtu.edu.cn:2100/p1team13
 ```
 
+Then Salut may generate a new Elm project in the cloned repository:
+
+```bash
+$ cd p1team13
+$ elm init
+$ echo "Project 1 Team 13" > README
+$ git add elm.json README
+$ git commit -m "Initial Commit"
+$ git push
+```
+
+Other teammates can clone the repository now with the following structure:
+
+```html
+.
+├── README
+└── elm.json
+```
+
 ## Building Specifications
 
 ### Makefile
@@ -79,7 +98,9 @@ In the example of `create-elm-app`, `PUBLIC_URL='.'` will handle everything corr
 
 ### Summary
 
-A minimum project structure after `git clone` should be
+In the beginning, each group will have an empty repo. You should only add and commit project files into the git repo, do not add generated files (eg. `elm-stuff`, `build`, `node_modules`) into it.
+
+A **minimum** submitted project structure in the git repository should be
 
 ```
 .
@@ -90,6 +111,8 @@ A minimum project structure after `git clone` should be
 └── src
     └── Main.elm
 ```
+
+You can add more files if needed.
 
 After running `make`, it should become
 ```
@@ -106,6 +129,8 @@ After running `make`, it should become
 └── src
     └── Main.elm
 ```
+
+Note that the `build` folder should contain everything necessary to run your game, which means, if you delete anything else than the `build` folder, your game should work.
 
 ## Example Projects
 
