@@ -13,7 +13,7 @@ setup(
         'redis',
         'python-redis-lock',
         'future',
-        'gunicorn'
-        'supervisord'
+        'gunicorn',
+        'supervisor',
     ],
 )
