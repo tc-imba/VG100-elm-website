@@ -14,6 +14,7 @@ REPOS = {
         {"name": "example-create-elm-app", "author": "Yihao Liu"},
         {"name": "p1teamta", "author": "Shixin Song"},
         {"name": "p1teamta-new", "author": "Li Shi"},
+        {"name": "p1teamta-sword", "author": "Yihao Liu"},
         {'name': 'p1team1', 'author': 'Xuye He,何叙烨, Qifei Wu,吴其非, Yi Xia,夏翌, siyuan lin 林思远'},
         {'name': 'p1team2', 'author': 'Zhehao Zhu 朱哲昊, Bokai Hu,胡博凯, Zihao Wei,魏子淏, Yidong Huang,黄奕东'},
         {'name': 'p1team3', 'author': 'Zefang Wei,危泽放, Danyu Zhou,周丹宇, Jigang Li,李济纲, Haifeng Jia,贾海峰'},
