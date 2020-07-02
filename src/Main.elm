@@ -110,6 +110,7 @@ pageConfigList =
             (markdownPrefix "project")
             "project.md"
             [ ( "project.p1", initPageConfig "Project 1" (projectPrefix "p1") "" [] )
+            , ( "project.p2", initPageConfig "Project 2" (projectPrefix "p2") "" [] )
             ]
       )
 
