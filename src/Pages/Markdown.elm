@@ -77,7 +77,7 @@ injectLinks markdown model =
     -- this is dirty! fix it later!
     markdown
         |> String.replace "](./" ("](" ++ model.flags.api ++ model.flags.prefix ++ "/api/markdown/" ++ model.markdownName ++ "/../")
-        --|> String.replace "href=\"./" ("href=\"" ++ model.api ++ "/api/markdown/" ++ model.markdownName ++ "/../")
+        |> String.replace "src=\"./" ("src=\"" ++ model.flags.api ++ model.flags.prefix ++ "/api/markdown/" ++ model.markdownName ++ "/../")
         |> String.replace "(/demo/" ("(" ++ model.flags.api ++ model.flags.prefix ++ "/demo/")
         |> String.replace "(/src/" ("(" ++ model.flags.prefix ++ "/src/")
 

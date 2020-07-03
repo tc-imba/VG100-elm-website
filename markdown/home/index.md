@@ -1,4 +1,4 @@
-<img src="./Logo.png" alt="Management Team Photo" title="Management Team Photo" />
+<img src="./Logo.png" alt="Management Team Photo" title="Management Team Photo" style="max-width: 500px;" />
 
 # "We foster talents, encourage creativity, and reward excellence"
 
