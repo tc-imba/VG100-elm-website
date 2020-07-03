@@ -1,3 +1,6 @@
+<img src="./Logo.png" alt="Management Team Photo" title="Management Team Photo" />
+# ❝We foster talents, encourage creativity, and reward excellence❞ 
+
 SilverFocs incubator was founded in 2000 as a special branch of the FOCS company. Back in 2002, we released our first game, Creed of Knight, which grows into one of the most popular games through out the world. Over the past 20 years, SilverFocs has reached 10 thousand excellent games with over 100 million world-wide players.
 
 ## Our best practices
