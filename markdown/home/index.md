@@ -21,30 +21,46 @@ All developers at SilverFocs are fresh to the field rookies. Unconstrained by co
 
 ## Get to know abour your managers below!
 
+<style>
+.manager-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.manager-container img {
+    width: 20%;
+}
+.manager-container div {
+    width: 65%;
+}
+.manager-container ul, .manager-container li {
+    margin-bottom: -15px;
+}
+</style>
+
 ### Kazato Shozo, the Field Manager
-<table>
-<th width="180"> 
-<img src="./SilverFocsManagement-1.png" alt="Kazato Shojo Photo" title="Kazato Shojo Photo" />
-</th>
-<th align="left">
-<u>Responsibility:</u> To ensure the entrusted field is productive and expanding timely.<br>
-<u>Previous notable projects:</u>
-<ul>
-<li> "Skyville"(Project Manager)</li>
-<li> "Awe and Fear"(Field Manager) </li>
-<li> "Competitors of Trophy Hunting"(Group Manager)</li>
-<li> "Nero Sun" (Sound Designer)</li>
-</ul>
-Is known to give brief comprehensive feedback.
-</th>
-</table>
+
+<div class="manager-container">
+    <img src="./SilverFocsManagement-1.png" alt="Kazato Shojo Photo" title="Kazato Shojo Photo" />
+    <div>
+        <u>Responsibility:</u> To ensure the entrusted field is productive and expanding timely. <br/>
+        <u>Previous notable projects:</u>
+        <ul>
+            <li> "Skyville" (Project Manager) </li>
+            <li> "Awe and Fear" (Field Manager) </li>
+            <li> "Competitors of Trophy Hunting" (Group Manager) </li>
+            <li> "Nero Sun" (Sound Designer) </li>
+        </ul>
+        <p>Is known to give brief comprehensive feedback.</p>
+    </div>
+</div>
 
 ### Josie Mendoza, the District Manager 
 <table>
-<th width="180"> 
+<td width="180"> 
 <img src="./SilverFocsManagement-2.png" alt="Josie Mendoza Photo" title="Josie Mendoza Photo" />
-</th>
-<th align="left"> 
+</td>
+<td align="left"> 
 <u>Responsibility:</u> To ensure the section of the company is keeping up with set schedule and not straying from field policy.<br>
 <u>Previous notable projects:</u>
 <ul>
@@ -56,15 +72,15 @@ Is known to give brief comprehensive feedback.
 <br>
 <br>
 Is known to point out the most important issues in her feedback.
-</th>
+</td>
 </table>
 
 ### Mikel Leblanc, the Group Manager
 <table>
-<th width="180"> 
+<td width="180"> 
 <img src="./SilverFocsManagement-3.png" alt="Mikel Leblanc Photo" title="Mikel Leblanc Photo"/>
-</th>
-<th align="left"> 
+</td>
+<td align="left"> 
 <u>Responsibility:</u> To manage and oversee the work of active project teams. Ensure, they are working on schedule and producing quality work.<br>
 <u>Previous notable projects:</u> 
 <ul>
@@ -76,15 +92,15 @@ Is known to point out the most important issues in her feedback.
 <u>Previously worked at:</u> The Gatherer Softworks(Project Manager)<br>
 <br>
 Is known for spoting many issues, even if they are hiding in the tiniest of details. 
-</th>
+</td>
 </table>
 
 ### Long Zhou, the Technical Production Manager
 <table>
-<th width="180"> 
+<td width="180"> 
 <img src="./SilverFocsManagement-4.png" alt="Long Zhou Photo" title="Long Zhou Photo"  />
-</th>
-<th align="left"> 
+</td>
+<td align="left"> 
 <u>Responsibilities:</u> To ensure the work done is not harmful to the 
 company's long term ambitions. For example, the code is written well 
 enough to support long term maintenance, the games can be run on 
@@ -98,15 +114,15 @@ developer)</li>
 <u>Awards:</u> DevelopAwards(Engine for "No PC Unfried" Engine)
 <u>Previously worked at:</u> The Gatherer Softworks(Lead Engine developer)<br><br>
 Is known for his exceptional technical feedback. 
-</th>
+</td>
 </table>
 
 ### Joe Cherry, the Innovation Director
 <table>
-<th width="180"> 
+<td width="180"> 
 <img src="./SilverFocsManagement-5.png" alt="Joe Cherry Photo" title="Joe Cherry Photo"/>
-</th>
-<th align="left"> 
+</td>
+<td align="left"> 
 <u>Responsibilities:</u> To find and foster innovative ideas within the company and to encourage unique thinking on all levels.<br>
 <u>Previous notable projects:</u> 
 <ul>
@@ -122,15 +138,15 @@ Designer</li>
 </ul>
 <u>Previously worked at:</u> GreenSkyGames(Co-Founder and Lead Designer)<br><br>
 <u>Warning:</u> is known to be eccentric and overenthusiastic at times.
-</th>
+</td>
 </table>
 
 ### Vonda Holder, the Preemptive Brand Manager
 <table>
-<th width="180"> 
+<td width="180"> 
 <img src="./SilverFocsManagement-6.png" alt="Vonda Holder Photo" title="Vonda Holder Photo"  />
-</th>
-<th align="left"> 
+</td>
+<td align="left"> 
 <u>Responsibilities:</u> To protect the brand image by checking intellectual property being produced at the company for possible breaches of copyright, for inappropriate topics and general adherence to brand and company image.<br>
 <u>Previous notable projects:</u> 
 <ul>
@@ -140,29 +156,29 @@ Designer</li>
 </ul>
 Is known as the go-to authority for complicated copyright questions and other risk assessments.<br><br>
 <u>Warning:</u> does not pull any punches.
-</th>
+</td>
 </table>
 
 ### Ines Scott, SilverFocs CTO
 <table>
-<th width="180"> 
+<td width="180"> 
 <img src="./SilverFocsManagement-7.png" alt="Ines Scott Photo" title="Ines Scott Photo"  />
-</th>
-<th align="left"> 
+</td>
+<td align="left"> 
 <u>Responsibility:</u> Making executive decisions on behalf of the company's technological requirements,managing technology budgets and time frames, ensuring all technology practices adhere to regulatory standards.<br><br>
 <u>Warning:</u> as a CTO of the whole company, shall only be contacted if it is needed.
-</th>
+</td>
 </table>
 
 ### Donnell Benitez, SilverFocs CEO
 <table>
-<th width="180"> 
+<td width="180"> 
 <img src="./SilverFocsManagement-8.png" alt="Donnel Benitez Photo" title="Donnel Benitez Photo"/>
-</th>
-<th align="left"> 
+</td>
+<td align="left"> 
 <u>Responsibility:</u> Make high-level decisions about policy and strategy, develop and implement operational policies and a strategic plan, oversee the company’s fiscal activity, including budgeting, reporting, and auditing.<br><br>
 <u>Warning:</u> as a CEO of the whole company, shall only be contacted if it is needed.
-</th>
+</td>
 </table>
 
 ## License
