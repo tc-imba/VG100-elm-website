@@ -369,7 +369,7 @@ main =
 
 view : Model -> Browser.Document Msg
 view model =
-    { title = "VG100 Elm Course Website"
+    { title = "Silver FOCS"
     , body = [ viewSkeleton model (currentPage model) ]
     }
 
@@ -443,7 +443,7 @@ viewTopAppBar model =
                 model.mdc
                 [ Options.onClick ToggleDrawer ]
                 "menu"
-            , TopAppBar.title [] [ text "VG100 Elm Course Website" ]
+            , TopAppBar.title [] [ text "Silver FOCS" ]
             ]
         ]
 
