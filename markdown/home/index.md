@@ -51,7 +51,7 @@ All developers at SilverFocs are fresh to the field rookies. Unconstrained by co
             <li> "Competitors of Trophy Hunting" (Group Manager) </li>
             <li> "Nero Sun" (Sound Designer) </li>
         </ul>
-        <p>Is known to give brief comprehensive feedback.</p>
+        Is known to give brief comprehensive feedback.
     </div>
 </div>
 
@@ -67,7 +67,7 @@ All developers at SilverFocs are fresh to the field rookies. Unconstrained by co
             <li> "Cyberscape" (District Manager)</li> 
             <li> "Antirage"(Developer)</li> 
         </ul>
-        <u>Awards:</u> Outstanding District Manager(two last years in a row)<br><br>
+        <u>Awards:</u> Outstanding District Manager(two last years in a row)<br>
         Is known to point out the most important issues in her feedback.
     </div>
 </div>
@@ -86,7 +86,6 @@ All developers at SilverFocs are fresh to the field rookies. Unconstrained by co
         </ul>
         <u>Awards:</u> GameDevHeroes(Leadership Hero)<br>
         <u>Previously worked at:</u> The Gatherer Softworks(Project Manager)<br>
-        <br>
         Is known for spoting many issues, even if they are hiding in the tiniest of details. 
     </div>
 </div>
@@ -102,16 +101,11 @@ All developers at SilverFocs are fresh to the field rookies. Unconstrained by co
         <li> "No Pc Unfried: The Game"(Lead Engine developer)</li> 
         <li> "Spellborn War" (Solo Developer),</li> 
         </ul>
-        <u>Awards:</u> DevelopAwards(Engine for "No PC Unfried" Engine)
+        <u>Awards:</u> DevelopAwards(Engine for "No PC Unfried" Engine)<br>
         <u>Previously worked at:</u> The Gatherer Softworks(Lead Engine developer)<br>
-        <br>
         Is known for his exceptional technical feedback. 
     </div>
 </div>
-
-
-</td>
-</table>
 
 ### Joe Cherry, the Innovation Director
 <div class="manager-container">
@@ -129,7 +123,7 @@ All developers at SilverFocs are fresh to the field rookies. Unconstrained by co
         <li>  Game Developers Choice Awards(Innovation Award) as Lead Designer</li> 
         <li>  GameDevHeroes(Unsung Hero)</li> 
         </ul>
-        <u>Previously worked at:</u> GreenSkyGames(Co-Founder and Lead Designer)<br><br>
+        <u>Previously worked at:</u> GreenSkyGames(Co-Founder and Lead Designer)<br>
         <u>Warning:</u> is known to be eccentric and overenthusiastic at times.
     </div>
 </div>
@@ -154,8 +148,8 @@ All developers at SilverFocs are fresh to the field rookies. Unconstrained by co
 <div class="manager-container">
     <img src="./SilverFocsManagement-7.png" alt="Ines Scott Photo" title="Ines Scott Photo" />
     <div>
-        <u>Responsibility:</u> Making executive decisions on behalf of the company's technological requirements,managing technology budgets and time frames, ensuring all technology practices adhere to regulatory standards.<br><br>
-        <u>Warning:</u> as a CTO of the whole company, shall only be contacted if it is needed.
+        <u>Responsibility:</u> Making executive decisions on behalf of the company's technological requirements,managing technology budgets and time frames, ensuring all technology practices adhere to regulatory standards.<br>
+        <u>Warning:</u> as a CTO of the whole company, shall only be contacted if it is needed.<br><br>
    </div>
 </div>
 
@@ -163,10 +157,17 @@ All developers at SilverFocs are fresh to the field rookies. Unconstrained by co
 <div class="manager-container">
     <img src="./SilverFocsManagement-8.png" alt="Donnell Benitez Photo" title="Donnell Benitez Photo" />
     <div>
-        <u>Responsibility:</u> Make high-level decisions about policy and strategy, develop and implement operational policies and a strategic plan, oversee the company’s fiscal activity, including budgeting, reporting, and auditing.<br><br>
-        <u>Warning:</u> as a CEO of the whole company, shall only be contacted if it is needed.
+        <u>Responsibility:</u> Make high-level decisions about policy and strategy, develop and implement operational policies and a strategic plan, oversee the company’s fiscal activity, including budgeting, reporting, and auditing.<br>
+        <u>Warning:</u> as a CEO of the whole company, shall only be contacted if it is needed.<br><br>
    </div>
 </div>
+
+## Source Code
+
+The source code of this website is released on https://github.com/tc-imba/VG100-elm-website.
+
+The frontend is built by pure Elm with [create-elm-app](https://github.com/halfzebra/create-elm-app), and the backend is built by Python with [Flask](https://flask.palletsprojects.com/en/1.1.x/) and [celery](https://docs.celeryproject.org/en/stable/).
+
 
 ## License
 
