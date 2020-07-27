@@ -39,6 +39,9 @@ type Msg
     | OnClickBuild String
     | OnClickLog String
     | OnRefreshLog String
+    | OnClickBooklet String
+    | OnClickPoster String
+    | OnClickTrailer String
     | OnClickPlay String
     | OnCloseDialog
 
@@ -109,6 +112,16 @@ update msg model =
 
             else
                 ( model, Cmd.none )
+
+        OnClickBooklet name ->
+            ( model, openWindow (model.flags.api ++ model.flags.prefix ++ "/demo/" ++ name ++ "/doc/booklet.pdf") )
+
+        OnClickPoster name ->
+            ( model, openWindow (model.flags.api ++ model.flags.prefix ++ "/demo/" ++ name ++ "/doc/poster.pdf") )
+
+        OnClickTrailer name ->
+            ( model, openWindow (model.flags.api ++ model.flags.prefix ++ "/demo/" ++ name ++ "/doc/trailer.mp4") )
+
 
         OnClickPlay name ->
             ( model, openWindow (model.flags.api ++ model.flags.prefix ++ "/demo/" ++ name ++ "/") )
@@ -267,6 +280,33 @@ viewProjectButtons model project =
             ]
         , Card.actionIcons []
             [ IconButton.view Mdc
+                (project.name ++ "-action-icon-booklet")
+                model.mdc
+                [ Card.actionIcon
+                , IconButton.icon { on = "menu_book", off = "menu_book" }
+                , IconButton.label { on = "Booklet", off = "Booklet" }
+                , Options.onClick (OnClickBooklet project.name)
+                ]
+                []
+            , IconButton.view Mdc
+                (project.name ++ "-action-icon-poster")
+                model.mdc
+                [ Card.actionIcon
+                , IconButton.icon { on = "photo_album", off = "photo_album" }
+                , IconButton.label { on = "Poster", off = "Poster" }
+                , Options.onClick (OnClickPoster project.name)
+                ]
+                []
+            , IconButton.view Mdc
+                (project.name ++ "-action-icon-trailer")
+                model.mdc
+                [ Card.actionIcon
+                , IconButton.icon { on = "ondemand_video", off = "ondemand_video" }
+                , IconButton.label { on = "Trailer", off = "Trailer" }
+                , Options.onClick (OnClickTrailer project.name)
+                ]
+                []
+            , IconButton.view Mdc
                 (project.name ++ "-action-icon-play")
                 model.mdc
                 [ Card.actionIcon

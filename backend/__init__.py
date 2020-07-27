@@ -49,7 +49,11 @@ def show_project_demo_redirect(project):
 @app.route('%s/demo/<project>/' % url_prefix)
 @app.route('%s/demo/<project>/<path:name>' % url_prefix)
 def show_project_demo(project, name='index.html'):
-    repos_dir = os.path.join(os.path.dirname(app.instance_path), 'repos', project, 'build')
+    if name.startswith('doc/'):
+        name = name[4:]
+        repos_dir = os.path.join(os.path.dirname(app.instance_path), 'repos', project, 'doc')
+    else:
+        repos_dir = os.path.join(os.path.dirname(app.instance_path), 'repos', project, 'build')
     print(os.path.join(repos_dir, name))
     return send_from_directory(repos_dir, name)
 
