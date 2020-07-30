@@ -199,7 +199,6 @@ viewProject model project =
             []
             [ viewProjectImage model project
             , viewProjectTitle model project
-            , viewProjectBody model project
             , viewProjectButtons model project
             ]
         ]
@@ -215,12 +214,13 @@ viewProjectImage model project =
     Card.media
         [ Card.aspect16To9
         , Card.backgroundImage <| projectImageUrl model project
-        , css "position" "absolute"
-        , css "top" "0"
-        , css "bottom" "0"
-        , css "left" "0"
-        , css "right" "0"
-        , css "opacity" "0.1"
+
+        --, css "position" "absolute"
+        --, css "top" "0"
+        --, css "bottom" "0"
+        --, css "left" "0"
+        --, css "right" "0"
+        --, css "opacity" "0.1"
         ]
         []
 
@@ -228,19 +228,35 @@ viewProjectImage model project =
 viewProjectTitle : Model -> Project -> Html Msg
 viewProjectTitle model project =
     styled Html.div
-        [ css "padding" "1rem"
+        [ css "padding" "0.5rem 1rem 0"
         ]
-        [ styled Html.h2
-            [ Typography.headline6
-            , css "margin" "0"
+        [ styled Html.div
+            [ css "display" "flex"
+            , css "justify-content" "space-between"
+            , css "align-items" "center"
             ]
-            [ text project.name
+            [ styled Html.h2
+                [ Typography.headline6
+                , css "margin" "0"
+                ]
+                [ text project.name ]
+            , styled Html.div
+                [ css "padding" "0.5rem 1rem 0.5rem 1rem"
+                , css "vertical-align" "middle"
+                , Typography.body2
+
+                --, Theme.textSecondaryOnBackground
+                , css "color" (getColorByStatus project.status)
+                ]
+                [ text project.status ]
+
+            --, viewProjectStatus model project
             ]
         , styled Html.h3
             [ Typography.subtitle2
             , Theme.textSecondaryOnBackground
             , css "margin" "0.1rem"
-            , css "min-height" "3rem"
+            , css "min-height" "2.5rem"
             ]
             [ text ("by " ++ project.author)
             ]
@@ -263,18 +279,6 @@ getColorByStatus status =
             "#000000"
 
 
-viewProjectBody : Model -> Project -> Html Msg
-viewProjectBody model project =
-    styled Html.div
-        [ css "padding" "0 1rem 0.5rem 1rem"
-        , Typography.body2
-        , Theme.textSecondaryOnBackground
-        ]
-        [ text "status: "
-        , styled Html.span [ css "color" (getColorByStatus project.status) ] [ text project.status ]
-        ]
-
-
 viewProjectButton : Model -> Project -> ( String, String, String -> Msg ) -> Html Msg
 viewProjectButton model project ( icon, iconName, event ) =
     IconButton.view Mdc
@@ -294,7 +298,8 @@ viewProjectButton model project ( icon, iconName, event ) =
 
 viewProjectButtons : Model -> Project -> Html Msg
 viewProjectButtons model project =
-    Card.actions []
+    Card.actions
+        [ css "padding" "0 1rem" ]
         [ Card.actionButtons []
             [ Button.view Mdc
                 (project.name ++ "-action-button-build")
