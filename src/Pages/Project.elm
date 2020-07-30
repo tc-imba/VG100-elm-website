@@ -215,12 +215,12 @@ viewProjectImage model project =
     Card.media
         [ Card.aspect16To9
         , Card.backgroundImage <| projectImageUrl model project
-        --, css "position" "absolute"
-        --, css "top" "0"
-        --, css "bottom" "0"
-        --, css "left" "0"
-        --, css "right" "0"
-        --, css "opacity" "0.2"
+        , css "position" "absolute"
+        , css "top" "0"
+        , css "bottom" "0"
+        , css "left" "0"
+        , css "right" "0"
+        , css "opacity" "0.1"
         ]
         []
 
@@ -275,6 +275,23 @@ viewProjectBody model project =
         ]
 
 
+viewProjectButton : Model -> Project -> ( String, String, String -> Msg ) -> Html Msg
+viewProjectButton model project ( icon, iconName, event ) =
+    IconButton.view Mdc
+        (project.name ++ "-action-icon-" ++ iconName)
+        model.mdc
+        [ Card.actionIcon
+        , IconButton.icon { on = icon, off = icon }
+        , IconButton.label { on = iconName, off = iconName }
+        , Options.onClick (event project.name)
+        , css "width" "40px"
+        , css "height" "40px"
+        , css "font-size" "20px"
+        , css "padding" "10px"
+        ]
+        []
+
+
 viewProjectButtons : Model -> Project -> Html Msg
 viewProjectButtons model project =
     Card.actions []
@@ -298,43 +315,12 @@ viewProjectButtons model project =
                 [ text "Log"
                 ]
             ]
-        , Card.actionIcons []
-            [ IconButton.view Mdc
-                (project.name ++ "-action-icon-booklet")
-                model.mdc
-                [ Card.actionIcon
-                , IconButton.icon { on = "menu_book", off = "menu_book" }
-                , IconButton.label { on = "Booklet", off = "Booklet" }
-                , Options.onClick (OnClickBooklet project.name)
-                ]
-                []
-            , IconButton.view Mdc
-                (project.name ++ "-action-icon-poster")
-                model.mdc
-                [ Card.actionIcon
-                , IconButton.icon { on = "photo_album", off = "photo_album" }
-                , IconButton.label { on = "Poster", off = "Poster" }
-                , Options.onClick (OnClickPoster project.name)
-                ]
-                []
-            , IconButton.view Mdc
-                (project.name ++ "-action-icon-trailer")
-                model.mdc
-                [ Card.actionIcon
-                , IconButton.icon { on = "ondemand_video", off = "ondemand_video" }
-                , IconButton.label { on = "Trailer", off = "Trailer" }
-                , Options.onClick (OnClickTrailer project.name)
-                ]
-                []
-            , IconButton.view Mdc
-                (project.name ++ "-action-icon-play")
-                model.mdc
-                [ Card.actionIcon
-                , IconButton.icon { on = "sports_esports", off = "sports_esports" }
-                , IconButton.label { on = "Play", off = "Play" }
-                , Options.onClick (OnClickPlay project.name)
-                ]
-                []
+        , Card.actionIcons
+            [ css "margin-left" "0" ]
+            [ viewProjectButton model project ( "menu_book", "booklet", OnClickBooklet )
+            , viewProjectButton model project ( "photo_album", "poster", OnClickPoster )
+            , viewProjectButton model project ( "ondemand_video", "trailer", OnClickTrailer )
+            , viewProjectButton model project ( "sports_esports", "play", OnClickPlay )
             ]
         ]
 
