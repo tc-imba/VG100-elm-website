@@ -1,7 +1,5 @@
 # Project Submission
 
-(Draft)
-
 ## Git Repository
 
 Each group is assigned a git repository for each project. You can clone the repository by
@@ -109,7 +107,7 @@ A **minimum** submitted project structure in the git repository should be
 ├── elm.json
 ├── index.html
 └── src
-    └── Main.elm
+    └── Main.elm
 ```
 
 You can add more files if needed.
@@ -120,17 +118,28 @@ After running `make`, it should become
 ├── Makefile
 ├── README
 ├── build
-│   ├── index.html
-│   └── elm.js
+    ├── index.html
+    └── elm.js
 ├── elm-stuff
-│   └── ...
+    └── ...
 ├── elm.json
 ├── index.html
 └── src
-    └── Main.elm
+    └── Main.elm
 ```
 
 Note that the `build` folder should contain everything necessary to run your game, which means, if you delete anything else than the `build` folder, your game should work.
+
+## Documentation
+
+All documentation should be in the `doc` folder, the filenames should be
+
++ doc/trailer.mp4
++ doc/poster.pdf
++ doc/booklet.pdf
++ doc/thumbnail.jpg
+
+Make sure you can access these files on the website through the buttons on the project pile.
 
 ## Example Projects
 
