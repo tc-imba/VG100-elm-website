@@ -122,7 +122,6 @@ update msg model =
         OnClickTrailer name ->
             ( model, openWindow (model.flags.api ++ model.flags.prefix ++ "/demo/" ++ name ++ "/doc/trailer.mp4") )
 
-
         OnClickPlay name ->
             ( model, openWindow (model.flags.api ++ model.flags.prefix ++ "/demo/" ++ name ++ "/") )
 
@@ -198,11 +197,32 @@ viewProject model project =
         [ LayoutGrid.span4Desktop, LayoutGrid.span6Tablet, LayoutGrid.alignMiddle ]
         [ Card.view
             []
-            [ viewProjectTitle model project
+            [ viewProjectImage model project
+            , viewProjectTitle model project
             , viewProjectBody model project
             , viewProjectButtons model project
             ]
         ]
+
+
+projectImageUrl : Model -> Project -> String
+projectImageUrl model project =
+    model.flags.api ++ model.flags.prefix ++ "/demo/" ++ project.name ++ "/doc/thumbnail.jpg"
+
+
+viewProjectImage : Model -> Project -> Html Msg
+viewProjectImage model project =
+    Card.media
+        [ Card.aspect16To9
+        , Card.backgroundImage <| projectImageUrl model project
+        --, css "position" "absolute"
+        --, css "top" "0"
+        --, css "bottom" "0"
+        --, css "left" "0"
+        --, css "right" "0"
+        --, css "opacity" "0.2"
+        ]
+        []
 
 
 viewProjectTitle : Model -> Project -> Html Msg
