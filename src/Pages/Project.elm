@@ -239,7 +239,7 @@ viewProjectTitle model project =
                 [ Typography.headline6
                 , css "margin" "0"
                 ]
-                [ text project.name ]
+                [ text project.title ]
             , styled Html.div
                 [ css "padding" "0.5rem 1rem 0.5rem 1rem"
                 , css "vertical-align" "middle"

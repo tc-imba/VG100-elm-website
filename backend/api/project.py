@@ -61,6 +61,7 @@ def build_project(name: str):
             'author': '',
             'code': -1,
             'status': 'fail',
+            'title': name,
         }
     else:
         add_task(name)
@@ -71,6 +72,7 @@ def build_project(name: str):
             'author': repo.get('author', ''),
             'code': -1,
             'status': get_status(name, return_code, task_set),
+            'title': repo.get('title', name),
         }
     return jsonify(result)
 
@@ -87,7 +89,8 @@ def list_project(name: str):
                 'name': repo['name'],
                 'author': repo.get('author', ''),
                 'code': return_code,
-                'status': get_status(repo['name'], return_code, task_set)
+                'status': get_status(repo['name'], return_code, task_set),
+                'title': repo.get('title', repo['name']),
             })
     return jsonify(result)
 
@@ -104,6 +107,7 @@ def log_project(name: str):
         'author': repo.get('author', ''),
         'code': return_code,
         'status': get_status(name, return_code, task_set),
+        'title': repo.get('title', name),
         'stdout': get_log_file(name, 'stdout'),
         'stderr': get_log_file(name, 'stderr')
     }
