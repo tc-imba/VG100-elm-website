@@ -5,6 +5,10 @@ This project is bootstrapped with [Create Elm App](https://github.com/halfzebra/
 ## Setup
 
 ```bash
+# init node modules
+npm install -g yarn create-elm-app
+yarn
+
 # init the submodule
 git submodule update --init --recursive
 cd elm-mdc && make
@@ -17,10 +21,6 @@ elm make
 python3 -m virtualenv venv
 source venv/bin/activate
 pip3 install -e .
-
-# init node modules
-npm install -g yarn create-elm-app
-yarn
 ```
 
 Or you can run the setup script directly
@@ -32,7 +32,7 @@ Or you can run the setup script directly
 ## Development
 
 ```bash
-npx elm-app start
+npm run start
 FLASK_APP=backend FLASK_ENV=development flask run
 ```
 
@@ -41,7 +41,7 @@ This should start the web app on `127.0.0.1:3000` and the backend on `127.0.0.1:
 ## Production
 
 ```bash
-npx elm-app build
+npm run build
 FLASK_APP=backend FLASK_ENV=production flask run
 ```
 
