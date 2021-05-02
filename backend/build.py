@@ -1,11 +1,10 @@
-from backend import app
+from backend import app, celery
 import os
 import pickle
 import time
 import git
 import subprocess
 import shutil
-import celery
 import redis
 import redis_lock
 
